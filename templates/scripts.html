@@ -1,0 +1,51 @@
+{% load static %}
+  <!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <!-- Bootstrap Core Css  -->
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- Jquery Smooth Scroll  -->
+  <script src="{% static 'js/jquery.smoothscroll.js' %}"></script>
+  <!-- Jquery Easing -->
+  <script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+  <!-- Jquery Counter -->
+  <script src="{% static 'js/jquery.countTo.js' %}"></script>
+  <!-- Jquery Waypoints -->
+  <script src="{% static 'js/jquery.waypoints.js' %}"></script>
+  <!-- Jquery Appear Plugin -->
+  <script src="{% static 'js/jquery.appear.min.js' %}"></script>
+  <!-- Carousel Slider  -->
+  <script src="{% static 'js/carousel.min.js' %}"></script>
+  <!-- Jquery Parallex -->
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <!--Style Switcher -->
+  <script src="{% static 'js/bootstrap-dropdownhover.min.js' %}"></script>
+  <!-- Include jQuery Syntax Highlighter -->
+  <script type="text/javascript" src="{% static 'scripts/shCore.js' %}"></script>
+  <script type="text/javascript" src="{% static 'scripts/shBrushPhp.js' %}"></script>
+  <!-- Template Core JS -->
+  <script src="{% static 'js/custom.js' %}"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  -->
+  <script type="text/javascript"> 
+    $(document).on('submit','#votefrm',function(e){ 
+        e.preventDefault();
+        hidden = $("#hidden_postid").val()
+        $.ajax({ 
+            type:'POST', 
+            url:'{% url "vote_post"  %}', 
+            data: 
+            {  
+                post_id: hidden, 
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val() 
+            },
+            success:function(response){ 
+                  var instance = JSON.parse(response["data"]);
+                  var votecount =  parseInt($("#vote_count").text().trim())
+                  if (Boolean(instance) === true) {
+                    $(".vote_count").text((votecount + 1));
+                  } else {
+                    $(".vote_count").text((votecount - 1));
+                  }
+               } 
+            }) 
+        }); 
+    </script> 

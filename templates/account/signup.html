@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+<div class="main-content-area">
+
+  <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+  <section class="page-title">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+          <h1>
+            Create Account
+            </h1>
+        </div>
+        <!-- end col -->
+        <div class="col-md-6 col-sm-5 co-xs-12 text-right">
+          <div class="bread">
+            <ol class="breadcrumb">
+              <li><a href="#">Home</a>
+              </li>
+              <li><a href="#">Pages</a>
+              </li>
+              <li class="active">Sign Up</li>
+            </ol>
+          </div>
+          <!-- end bread -->
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end container -->
+  </section>
+
+  <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+
+  <!-- =-=-=-=-=-=-= Login Form =-=-=-=-=-=-= -->
+  <section class="section-padding-80 white" id="login">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+
+          <div class="box-panel">
+
+            <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+            </form>
+
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <!-- end container -->
+  </section>
+  <!-- =-=-=-=-=-=-= Login Form   End =-=-=-=-=-=-= -->
+
+</div>
+<!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+{% endblock %}

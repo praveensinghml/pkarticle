@@ -1,0 +1,117 @@
+          <!-- Right Sidebar -->
+          <div class="col-md-4 col-sm-12 col-xs-12 clearfix">
+
+            <!-- sidebar -->
+            <div class="side-bar">
+
+              <!-- widget -->
+              <!--<div class="widget">
+                <h2>Top Authors</h2>
+                <hr class="widget-separator no-margin">
+                <div class="media-group">
+
+                  <div class="media-group-item">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="avatar avatar-md avatar-circle"> <img alt="" class="" src="images/authors/1.jpg"> </div>
+                      </div>
+                      <div class="media-body">
+                        <h5 class="media-heading"><a href="profile.html">Praveen Singh</a></h5>
+                        <small class="media-meta">Sr. Software Engineer</small>
+                        <div class="points"><span>Points : </span>9958</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                  <div class="media-group-item">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="avatar avatar-md avatar-circle"> <img alt="" class="" src="images/authors/2.jpg"> </div>
+                      </div>
+                      <div class="media-body">
+                        <h5 class="media-heading"><a href="profile.html">Nitesh Singh</a></h5>
+                        <small class="media-meta">Web Designer</small>
+                        <div class="points"><span>Points : </span>7910</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                </div>
+              </div>-->
+              <!-- widget end -->
+                  <!-- Newsletter Section-->
+                  <!--<section class="newsletter no-padding-top">    
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h2>Subscribe to Newsletter</h2>
+                          <p class="text-big">Lorem ipsum dolor sit amet, consectetur adipisicing elit,<br/> 
+                            incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="col-md-8">
+                          <div class="form-holder">
+                            <form action="{% url 'email-list-signup' %}" method="POST">
+                              {% csrf_token %}
+                              <div class="form-group">
+                                  {{ form }}
+                                  <button type="submit" class="submit">Signup</button>
+                              </div>
+                            </form> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>-->
+              <!-- widget -->
+              <div class="widget">
+                <div class="latest-news">
+                    <h2>Latest Articles</h2>
+                    <hr class="widget-separator no-margin">
+                    {% for post in most_recent %}
+                        <div class="news-post">
+                        <div class="post">
+                            <figure class="post-thumb"><img alt="" src="{{ post.thumbnail.url }}">
+                            </figure>
+                            <h4><a href="{{post.get_absolute_url}}">{{ post.title }} </a></h4>
+                            <div class="views"><i class="fa fa fa-eye" aria-hidden="true"></i> {{ post.view_count }}&nbsp;&nbsp; <i class="fa fa-comment"></i>{{ post.comment_count }}</div>
+                        </div>
+                        </div>
+                    {% endfor %}
+  
+                  </div>
+              </div>
+              <!-- widget end -->
+             <!--<div class="advertising"> <a href="javascript:void(0)"> <img alt="" src="http://fluentthemes.com/wp/knowledge/wp-content/uploads/2017/02/your-ad-here.jpg"> </a>
+             </div>-->
+
+              <div class="widget">
+                <div class="category">
+                  <h2>Category</h2>
+                  <hr class="widget-separator no-margin">
+                  <ul>
+                    {% for cat in category_count %}
+                    <li><a href="{% url 'searchbycat' category=cat.categories__title %}">{{ cat.categories__title }}</a>&nbsp;&nbsp;<span class="badge bg-success" style="color: white;">{{cat.categories__title__count}}</span></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+              <div class="widget">
+                <div class="widget_tag_cloud">
+                 <h2 class="widget_title">Tag Cloud</h2>
+                  <hr class="widget-separator no-margin">
+                  <div class="tagcloud">
+                    {% for tag in tags %}
+                        &nbsp;<span class="badge badge-success"><a href="{% url 'searchbytag' tags=tag.tags__title %}">{{ tag.tags__title }}</a></span>
+                    {% endfor %}
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+            <!-- sidebar end -->
+          </div>
+          <!-- Right Sidebar End -->

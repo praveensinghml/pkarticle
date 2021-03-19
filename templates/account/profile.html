@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+  <div class="main-content-area">
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-7 col-xs-12 text-left">
+            <h1>
+              {% if user.is_authenticated %}
+                User: {{ user.get_username }}
+              {% else %}
+              <a href="{% url 'account_login'%}?next={{request.path}}">Login</a>
+              {% endif %}
+        
+            </h1>
+          </div>
+          <!-- end col -->
+          <div class="col-md-6 col-sm-5 col-xs-12 text-right">
+            <div class="bread">
+              <ol class="breadcrumb">
+                <li><a href="#">Home</a>
+                </li>
+                <li><a href="#">Pages</a>
+                </li>
+                <li class="active">Profile</li>
+              </ol>
+            </div>
+            <!-- end bread -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+
+    <section class="section-padding-80 white" id="login">
+      <div class="container">
+        <div class="row">
+        <!-- Profile Sec -->
+        {% if user.is_authenticated %}
+          <a href="{% url 'account_change_password'%}?next={{request.path}}">Change Password</a><br/>
+          <a href="{% url 'account_reset_password'%}?next={{request.path}}">Reset Password</a><br/>
+          <a href="{% url 'account_logout'%}?next={{request.path}}">Logout</a>
+        {% endif %}
+         </div>
+      </div>
+    </section>
+
+    <!-- =-=-=-=-=-=-= User Profile end =-=-=-=-=-=-= -->
+    
+  </div>
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+  {% endblock content %}

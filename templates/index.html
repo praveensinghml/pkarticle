@@ -1,0 +1,123 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- =-=-=-=-=-=-= HOME =-=-=-=-=-=-= -->
+  <div id="home" class="full-section parallax-home">
+    <div class="slider-caption">
+      <h1> Are You Looking for reading machine learning ? </h1>
+      <h2> <span>Join  Our Community</span></h2>
+      <a class="btn btn-transparent" href="{% url 'account_login'%}"> Join Now </a> <a class="btn btn-light" href="{% url 'post-list'%}"> Start Browsing </a> </div>
+  </div>
+  <!-- =-=-=-=-=-=-= HOME END =-=-=-=-=-=-= -->
+
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+  <div class="main-content-area">
+
+    <!-- =-=-=-=-=-=-= Latest Questions  =-=-=-=-=-=-= -->
+    <section class="section-padding-80 white" id="latest-post">
+      <div class="container">
+        <!-- title-section -->
+        <div class="main-heading text-center">
+          <h2>Recent Articles</h2>
+          <div class="slices"><span class="slice"></span><span class="slice"></span><span class="slice"></span>
+          </div>
+        </div>
+        <!-- End title-section -->
+
+        <div class="row">
+          <!-- Content Area Bar -->
+          <div class="col-md-8 col-sm-12">
+            <div class="listing">
+              <!-- Question Area Panel -->
+              <div class="listing-area">
+                
+                {% for obj in object_list %}
+                    <!-- Question Listing -->
+                    <div class="listing-grid ">
+                      <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+                          <a data-toggle="tooltip" data-placement="bottom" data-original-title="{{ obj.author }}" href="#"><img alt="" class="correct img-responsive center-block" src="{{ obj.author.profile_picture.url }}">
+                          </a>
+                          <span class="tick"><i class="fa fa-check" aria-hidden="true"></i></span>
+                        </div>
+                        <div class="col-md-7 col-sm-8  col-xs-12">
+                          <h3><a  href="{{ obj.get_absolute_url }}"> 	
+                            {{ obj.title }}</a></h3>
+                          <div class="listing-meta">
+                            <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{ obj.timestamp|timesince }} ago</span>
+                            <span><i class="fa fa fa-eye" aria-hidden="true"></i> {{ obj.view_count }} Views</span>
+                          </div>
+
+                        </div>
+                        <div class="col-md-3 col-sm-2 col-xs-12">
+                          <ul class="question-statistic">
+
+                            <li class="active">
+                              <a data-toggle="tooltip" data-placement="bottom" data-original-title="Comments"><span>{{ obj.comment_count }}</span></a>
+                            </li>
+                            <li>
+                              <a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span>{{ obj.vote_count }}</span></a>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div class="col-md-10 col-sm-10  col-xs-12">
+      
+                          <p>{{ obj.overview|linebreaks|truncatechars:200 }}</p>
+                          <div class="pull-right tagcloud">
+                          {% for tag in tags %}
+                            <a href="{% url 'searchbytag' tags=tag.tags__title %}">{{ tag.tags__title }}</a>
+                          {% endfor %}
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+      
+                {% endfor %}
+                <!-- Question Listing End -->
+              </div>
+
+              <!-- Pagination View More -->
+              <div class="text-center clearfix">
+                 <!-- Pagination View More -->
+            {% if object_list.has_other_pages  %}
+            
+            <nav aria-label="Page navigation example" style="margin-left: 250px;">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                {% if object_list.has_previous %}                
+                <li class="page-item"><a href="?{{ page_request_var }}={{ object_list.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                {% endif %}
+                <li class="page-item"><a href="?{{ page_request_var }}={{ object_list.number }}" class="page-link active">{{ object_list.number }}</a></li>
+                {% if object_list.has_next %}
+                <li class="page-item"><a href="?{{ page_request_var }}={{ object_list.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </nav>
+            
+            {% endif %}
+
+              <!-- Pagination View More End -->
+              </div>
+              <!-- Pagination View More End -->
+
+              <!-- Question Area Panel End -->
+            </div>
+          </div>
+          <!-- Content Area Bar End -->
+          {% include 'right_sidebar.html' with most_recent=most_recent category_count=category_count %}
+
+
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Latest Questions  End =-=-=-=-=-=-= -->
+
+    
+
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+  {% endblock content %}

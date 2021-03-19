@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  .post-body img {
+    width: 100%;
+  }
+
+</style>
+
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+  <div class="main-content-area">
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+            <h1>Articles in Detials</h1>
+          </div>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= Question Details =-=-=-=-=-=-= -->
+
+    <section id="blog" class="custom-padding white">
+      <div class="container">
+
+        <!-- Row -->
+        <div class="row">
+
+          <!-- Left Side Content -->
+          <div class="col-sm-12 col-xs-12 col-md-8">
+
+            <!-- Blog Grid -->
+
+            <div class="blog-detial">
+              <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.thumbnail.url }}"> </div>
+              <div class="blog-content">
+                <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                {% if user.is_authenticated %}
+                <form id="votefrm" name="votefrm">
+                  {% csrf_token %}
+                  <input type="hidden" id="hidden_postid" name="hidden_postid" value="{{ post.id }}"/>
+                  {% if liked %}
+                  <div>
+                    <button type="submit"
+                            name="post_id"
+                            value="{{ post.id }}"
+                            class="vote-btn" 
+                            data-default-text="Vote This Dish Up!">
+                            <svg width="25" height="25" aria-label="clap"><g fill-rule="evenodd"><path d="M13.74 1l.76 2.97.76-2.97zM18.63 2.22l-1.43-.47-.4 3.03zM11.79 1.75l-1.43.47 1.84 2.56zM24.47 14.3L21.45 9c-.29-.43-.69-.7-1.12-.78a1.16 1.16 0 0 0-.91.22c-.3.23-.48.52-.54.84l.05.07 2.85 5c1.95 3.56 1.32 6.97-1.85 10.14a8.46 8.46 0 0 1-.55.5 5.75 5.75 0 0 0 3.36-1.76c3.26-3.27 3.04-6.75 1.73-8.91M14.58 10.89c-.16-.83.1-1.57.7-2.15l-2.5-2.49c-.5-.5-1.38-.5-1.88 0-.18.18-.27.4-.33.63l4.01 4z"></path><path d="M17.81 10.04a1.37 1.37 0 0 0-.88-.6.81.81 0 0 0-.64.15c-.18.13-.71.55-.24 1.56l1.43 3.03a.54.54 0 1 1-.87.61L9.2 7.38a.99.99 0 1 0-1.4 1.4l4.4 4.4a.54.54 0 1 1-.76.76l-4.4-4.4L5.8 8.3a.99.99 0 0 0-1.4 0 .98.98 0 0 0 0 1.39l1.25 1.24 4.4 4.4a.54.54 0 0 1 0 .76.54.54 0 0 1-.76 0l-4.4-4.4a1 1 0 0 0-1.4 0 .98.98 0 0 0 0 1.4l1.86 1.85 2.76 2.77a.54.54 0 0 1-.76.76L4.58 15.7a.98.98 0 0 0-1.4 0 .99.99 0 0 0 0 1.4l5.33 5.32c3.37 3.37 6.64 4.98 10.49 1.12 2.74-2.74 3.27-5.54 1.62-8.56l-2.8-4.94z"></path></g></svg>
+                      </button>
+                      <span class="vote_count" id="vote_count">{{ vote_count }} </span>
+                  </div>
+                  {% else %}
+                  <div>
+                      <button type="submit"
+                      name="post_id"
+                      value="{{ post.id }}"
+                      class="vote-btn" 
+                      data-default-text="Vote This Dish Up!">
+                      <svg width="29" height="29" aria-label="clap"><g fill-rule="evenodd"><path d="M13.74 1l.76 2.97.76-2.97zM18.63 2.22l-1.43-.47-.4 3.03zM11.79 1.75l-1.43.47 1.84 2.56zM24.47 14.3L21.45 9c-.29-.43-.69-.7-1.12-.78a1.16 1.16 0 0 0-.91.22c-.3.23-.48.52-.54.84l.05.07 2.85 5c1.95 3.56 1.32 6.97-1.85 10.14a8.46 8.46 0 0 1-.55.5 5.75 5.75 0 0 0 3.36-1.76c3.26-3.27 3.04-6.75 1.73-8.91M14.58 10.89c-.16-.83.1-1.57.7-2.15l-2.5-2.49c-.5-.5-1.38-.5-1.88 0-.18.18-.27.4-.33.63l4.01 4z"></path><path d="M17.81 10.04a1.37 1.37 0 0 0-.88-.6.81.81 0 0 0-.64.15c-.18.13-.71.55-.24 1.56l1.43 3.03a.54.54 0 1 1-.87.61L9.2 7.38a.99.99 0 1 0-1.4 1.4l4.4 4.4a.54.54 0 1 1-.76.76l-4.4-4.4L5.8 8.3a.99.99 0 0 0-1.4 0 .98.98 0 0 0 0 1.39l1.25 1.24 4.4 4.4a.54.54 0 0 1 0 .76.54.54 0 0 1-.76 0l-4.4-4.4a1 1 0 0 0-1.4 0 .98.98 0 0 0 0 1.4l1.86 1.85 2.76 2.77a.54.54 0 0 1-.76.76L4.58 15.7a.98.98 0 0 0-1.4 0 .99.99 0 0 0 0 1.4l5.33 5.32c3.37 3.37 6.64 4.98 10.49 1.12 2.74-2.74 3.27-5.54 1.62-8.56l-2.8-4.94z"></path></g></svg>
+                    </button>
+                    <span class="vote_count" id="vote_count">{{ vote_count }} </span>
+                  </div>
+                  {% endif %}
+                </form>
+                {% else %}
+                <div>
+                  <a href="{% url 'account_login'%}?next={{ request.path }}">
+                    <svg width="25" height="25" aria-label="clap"><g fill-rule="evenodd"><path d="M13.74 1l.76 2.97.76-2.97zM18.63 2.22l-1.43-.47-.4 3.03zM11.79 1.75l-1.43.47 1.84 2.56zM24.47 14.3L21.45 9c-.29-.43-.69-.7-1.12-.78a1.16 1.16 0 0 0-.91.22c-.3.23-.48.52-.54.84l.05.07 2.85 5c1.95 3.56 1.32 6.97-1.85 10.14a8.46 8.46 0 0 1-.55.5 5.75 5.75 0 0 0 3.36-1.76c3.26-3.27 3.04-6.75 1.73-8.91M14.58 10.89c-.16-.83.1-1.57.7-2.15l-2.5-2.49c-.5-.5-1.38-.5-1.88 0-.18.18-.27.4-.33.63l4.01 4z"></path><path d="M17.81 10.04a1.37 1.37 0 0 0-.88-.6.81.81 0 0 0-.64.15c-.18.13-.71.55-.24 1.56l1.43 3.03a.54.54 0 1 1-.87.61L9.2 7.38a.99.99 0 1 0-1.4 1.4l4.4 4.4a.54.54 0 1 1-.76.76l-4.4-4.4L5.8 8.3a.99.99 0 0 0-1.4 0 .98.98 0 0 0 0 1.39l1.25 1.24 4.4 4.4a.54.54 0 0 1 0 .76.54.54 0 0 1-.76 0l-4.4-4.4a1 1 0 0 0-1.4 0 .98.98 0 0 0 0 1.4l1.86 1.85 2.76 2.77a.54.54 0 0 1-.76.76L4.58 15.7a.98.98 0 0 0-1.4 0 .99.99 0 0 0 0 1.4l5.33 5.32c3.37 3.37 6.64 4.98 10.49 1.12 2.74-2.74 3.27-5.54 1.62-8.56l-2.8-4.94z"></path></g></svg>
+                  </a>
+                  <span class="badge">{{ vote_count }}</span>
+                </div>
+                {% endif %}
+                </form>
+                <ul class="post-meta">
+                  <li>By {{ post.author.user.username }}</li>
+                  {% for cat in post.categories.all %}
+                    <li><a href="{% url 'searchbycat' category=cat %}">{{ cat }}</a></li>
+                  {% endfor %}
+                  <li><i class="fa fa-clock-o" aria-hidden="true"></i> {{ post.timestamp|timesince }} ago</li>
+                  <li><i class="fa fa fa-eye" aria-hidden="true"></i> {{ post.view_count }}</li>
+                  <li><i class="icon-chat"></i>&nbsp;&nbsp;{{ post.comment_count }}</li>
+                </ul>
+
+              </div>
+              <h5 style="color: darksalmon;">{{ post.overview }}</h5>
+
+              <div>
+                {{ post.content | safe }}
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="entry-footer">
+                <div class="post-admin">
+                  <i class="icon-profile-male"></i>Posted by<a href="#">{{ post.author.user.username }}</a>
+                  {% if user.is_authenticated %}
+
+                    <div>
+                      <a href="{% url 'post-update' pk=post.pk %}">Update</a>
+                      <a href="{% url 'post-delete' pk=post.pk %}">Delete</a>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="tags">
+                  <i class="fa fa-tags"></i>
+                  {% for tag in tags %}
+                    <a href="{% url 'searchbytag' tags=tag %}">{{ tag }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+              <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+                {% if post.previous_post %}
+                <a href="{{ post.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
+                    <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                    <div class="text"><strong class="text-primary">Previous Post </strong>
+                      <h6>{{ post.previous_post.title }}</h6>
+                    </div>
+                </a>
+                {% endif %}
+                {% if post.next_post %}
+                <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                    <div class="text"><strong class="text-primary">Next Post </strong>
+                      <h6>{{ post.next_post.title }}</h6>
+                    </div>
+                    <div class="icon next"><i class="fa fa-angle-right">   </i></div>
+                </a>
+                {% endif %}
+                </div>
+
+              <div class="blog-section">
+                <div class="blog-heading">
+                  <h2>Comments ({{ post.comments.count }})</h2>
+                  <hr>
+                </div>
+
+                <ol class="comment-list">
+                  <!-- comment-list    -->
+                  {% for comment in post.get_comments %}
+                    <li class="comment">
+                      <div class="comment-info">
+                        {% if comment.user.author %}
+                          <img src="{{ comment.user.author.profile_picture.url }}" alt="..." class="pull-left hidden-xs img-circle"/>
+                        {% else %}
+                          <img src="{{ comment.user.author.profile_picture.url }}" alt="..." class="pull-left hidden-xs img-circle">
+                        {% endif %}
+                        <div class="author-desc">
+                          <div class="author-title">
+                            <strong>{{ comment.user.username }}</strong>
+                            <ul class="list-inline pull-right">
+                              <li>{{ comment.timestamp|timesince }} ago
+                              </li>
+                            </ul>
+                          </div>
+                          <p>{{ comment.content }}</p>
+                        </div>
+                      </div>
+                    </li>
+                  {% endfor %}
+                  
+                  <!-- .comment -->
+                </ol>
+
+              </div>
+
+              <div class="clearfix"></div>
+            {% if request.user.is_authenticated %}
+              <div class="blog-section">
+                <div class="blog-heading">
+                  <h2>leave your comment </h2>
+                  <hr>
+                </div>
+                <div class="commentform">
+                  <form method="POST" action="." id="usercomment" class="commenting-form">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-6 col-sm-12">
+                        {{ form }}
+                        <div class="col-md-12 col-sm-12 margin-top-20 clearfix">
+                          <button type="submit"  class="btn btn-primary">Post Your Comment</button>
+                        </div>
+                      </div>
+                    </div> 
+                  </form>
+                </div>
+              </div>
+              {% else %}
+              <a href="{% url 'account_login'%}?next={{ request.path }}" class="btn btn-primary"> Login to Comment</a>
+              {% endif %}
+            </div>
+
+
+            <!-- Blog Grid -->
+            <div class="clearfix"></div>
+            <!-- Pagination End -->
+          </div>
+          <!-- Left Content End -->
+
+          {% include 'right_sidebar.html' with most_recent=most_recent category_count=category_count tags=rhs_tags %}
+
+        </div>
+
+        <!-- Row End -->
+      </div>
+      <!-- end container -->
+    </section>
+          
+        <!-- Row End -->
+      </div>
+    </section>
+    <!-- =-=-=-=-=-=-= Question Details end =-=-=-=-=-=-= -->
+
+
+
+  </div>
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+
+{% endblock content %}
