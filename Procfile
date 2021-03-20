@@ -1,0 +1,1 @@
+web: ginicorn blog.wsgi
