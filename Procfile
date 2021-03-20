@@ -1,1 +1,1 @@
-web: ginicorn blog.wsgi
+web: ginicorn blog.app --preload
