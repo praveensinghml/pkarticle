@@ -11,7 +11,7 @@ class TinyMCEWidget(TinyMCE):
 class PostForm(forms.ModelForm):
     content = forms.CharField(
         widget=TinyMCEWidget(
-            attrs={'required': False, 'cols': 30, 'rows': 10}
+            attrs={'required': False, 'cols': 30, 'rows': 10, 'id': 'postcontent'}
         )
     )
 

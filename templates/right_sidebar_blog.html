@@ -1,0 +1,33 @@
+          <!-- Right Sidebar -->
+          <div class="col-sm-12 col-xs-12 col-md-4">
+
+            <!-- sidebar -->
+            <div class="side-bar">
+
+              <div class="widget">
+                <div class="latest-news">
+                    <h2>Related Articles</h2>
+                    <hr class="widget-separator no-margin">
+                    {% for post in most_relative %}
+                        <div class="news-post">
+                        <div class="post">
+                            <figure class="post-thumb"><img alt="" src="{{ post.thumbnail.url }}">
+                            </figure>
+                            <h4><a href="{{post.get_absolute_url}}">{{ post.title }} </a></h4>
+                            <div class="views"><i class="fa fa fa-eye" aria-hidden="true"></i> {{ post.view_count }}&nbsp;&nbsp; <i class="fa fa-comment"></i>{{ post.comment_count }}</div>
+                        </div>
+                        </div>
+                    {% endfor %}
+  
+                  </div>
+              </div>
+              <!-- widget end -->
+             <!--<div class="advertising"> <a href="javascript:void(0)"> <img alt="" src="http://fluentthemes.com/wp/knowledge/wp-content/uploads/2017/02/your-ad-here.jpg"> </a>
+             </div>-->
+
+
+
+            </div>
+            <!-- sidebar end -->
+          </div>
+          <!-- Right Sidebar End -->

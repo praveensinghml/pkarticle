@@ -175,10 +175,10 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
-        most_recent = Post.objects.order_by('-timestamp')[:3]
+        most_recent = Post.objects .order_by('-timestamp')[:3]
         tags = get_tags_count()
         context = super().get_context_data(**kwargs)
-        context['most_recent'] = most_recent
+        context['most_related'] = most_recent
         context['page_request_var'] = "page"
         context['category_count'] = category_count
         context['tags'] = tags
@@ -207,13 +207,13 @@ class PostDetailView(DetailView):
         vote_count = get_object_or_404(Post, id= self.kwargs['pk'])
         tags = get_object_or_404(Post, id= self.kwargs['pk'])
         rhs_tags = get_tags_count()
-        most_recent = Post.objects.order_by('-timestamp')[:3]
+        most_relative = Post.objects .order_by('-timestamp')[:3]
         liked = False
         if vote_count.votes.filter(id = self.request.user.id).exists():
             liked = True
 
         context = super().get_context_data(**kwargs)
-        context['most_recent'] = most_recent
+        context['most_relative'] = most_relative
         context['page_request_var'] = "page"
         context['category_count'] = category_count
         context['liked'] = liked
@@ -250,12 +250,16 @@ class PostCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = get_author(self.request.user)
         form.save()
+        print('get')
         return redirect(reverse("post-detail", kwargs={
             'pk': form.instance.pk,
             'slug': slugify(form.instance.title)
         }))
-
-
+ 
+def check(request):
+    if request.method=="POST":
+        print('get')
+        return render(request,'blog.html')
 
 
 class PostUpdateView(UpdateView):
