@@ -5,6 +5,7 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView # new
 
 from posts.views import (
+    PracticeView,
     VoteView,
     IndexView,
     SearchView,
@@ -39,6 +40,8 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('contact/', ContactView, name='contact'),
     path('vote/', VoteView, name='vote_post'),
+    path('practice/', PracticeView, name='practice'),
+    
     path('searchbycat/<category>/', blog_category, name='searchbycat'),
     path('searchbytag/<tags>/', blog_tags, name='searchbytag'),
     

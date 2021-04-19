@@ -175,7 +175,7 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
-        most_recent = Post.objects .order_by('-timestamp')[:3]
+        most_recent = Post.objects.order_by('-timestamp')[:3]
         tags = get_tags_count()
         context = super().get_context_data(**kwargs)
         context['most_related'] = most_recent
@@ -304,3 +304,8 @@ def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     post.delete()
     return redirect(reverse("post-list"))
+
+def PracticeView(request):
+    message_email = ""
+    if request.method == 'GET':
+        return render(request, "practice.html")

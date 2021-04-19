@@ -44,6 +44,7 @@
             <!-- Blog Grid -->
 
             <div class="blog-detial">
+           
               <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.thumbnail.url }}"> </div>
               <div class="blog-content">
                 <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
@@ -112,7 +113,7 @@
 
               <div class="entry-footer">
                 <div class="post-admin">
-                  Posted by <img height="30px" weight="15px" src="{{ post.author.profile_picture.url  }}" class="img-rectangle"/> <a href="#">{{ post.author.user.username }}</a>
+                  <i class="icon-profile-male"></i>Posted by<a href="#">{{ post.author.user.username }}</a>
                 </div>
                 <div class="tags">
                   <i class="fa fa-tags"></i>

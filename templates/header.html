@@ -54,8 +54,11 @@
           <span class="icon-bar"></span>
         </button>
         <!-- logo -->
-        <a href="/" class="navbar-brand"><img class="img-responsive" alt="" src="{% static 'images/logo.png' %}">
+        <div style="margin-left: -1000px;">
+        <a href="/" class="navbar-brand">
+          <img class="img-responsive" alt="" src="{% static 'images/logo.png' %}">
         </a>
+      </div>
         <!-- search form -->
         <form role="search" action="{% url 'search' %}" class="navbar-form pull-left">
           <div class="icon-addon addon-lg">
@@ -64,7 +67,6 @@
           </div>
         </form>
         <!-- header end -->
-        <!-- header end -->
       </div>
       <!-- navigation menu -->
       <div class="navbar-collapse collapse">
@@ -72,7 +74,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="{% url 'post-list'%}">Browse Articles</a>
           </li>
-          <!--<li>
+          <!-- <li>
             {% if user.is_authenticated %}
               <div class="btn-nav"><a href="{% url 'post-create'%}" class="btn btn-primary btn-small navbar-btn">Post Articles</a>
               </div>
@@ -81,7 +83,7 @@
               <a href="{% url 'account_login' %}" class="btn btn-primary btn-small navbar-btn"> Login to Post Article</a>
             </div>
             {% endif %}
-          </li>-->
+          </li> -->
         </ul>
       </div>
       <!-- navigation menu end -->

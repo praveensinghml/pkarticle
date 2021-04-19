@@ -48,13 +48,8 @@
               <!-- Blog Grid -->
               <div class="col-xs-12 col-sm-12 col-md-8  col-lg-12" style="position: absolute; left: 0px; top: 0px;">
                 <div class="blog-grid">
-                  <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
-                    <a data-toggle="tooltip" data-placement="bottom" data-original-title="{{ post.author }}" href="#"><img alt="" class="correct img-responsive center-block" src="{{ post.thumbnail.url }}">
-                    </a>
-                    <span class="tick"><i class="fa fa-check" aria-hidden="true"></i></span>
-                  </div>
-                  <!-- <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.author.profile_picture.url }}"> </div> -->
-                  <div class="blog-content">
+                 <div class="blog-content">
+                     <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.thumbnail.url }}"> </div>
                     <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
                     <p>{{ post.overview|linebreaks|truncatechars:200 }}</p>
                     <ul class="post-meta">

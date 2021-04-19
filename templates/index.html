@@ -28,83 +28,62 @@
 
         <div class="row">
           <!-- Content Area Bar -->
-          <div class="col-md-8 col-sm-12">
-            <div class="listing">
-              <!-- Question Area Panel -->
-              <div class="listing-area">
-                
-                {% for obj in object_list %}
-                    <!-- Question Listing -->
-                    <div class="listing-grid ">
-                      <div class="row">
-                        <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
-                          <a data-toggle="tooltip" data-placement="bottom" data-original-title="{{ obj.author }}" href="#"><img alt="" class="correct img-responsive center-block" src="{{ obj.author.profile_picture.url }}">
-                          </a>
-                          <span class="tick"><i class="fa fa-check" aria-hidden="true"></i></span>
-                        </div>
-                        <div class="col-md-7 col-sm-8  col-xs-12">
-                          <h3><a  href="{{ obj.get_absolute_url }}"> 	
-                            {{ obj.title }}</a></h3>
-                          <div class="listing-meta">
-                            <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{ obj.timestamp|timesince }} ago</span>
-                            <span><i class="fa fa fa-eye" aria-hidden="true"></i> {{ obj.view_count }} Views</span>
-                          </div>
+          <div class="col-sm-12 col-xs-12 col-md-8"> 
 
-                        </div>
-                        <div class="col-md-3 col-sm-2 col-xs-12">
-                          <ul class="question-statistic">
+            <!-- Blog Masonry Grid -->
+            <div id="posts-masonry" class="posts-masonry" style="position: relative; height: 800px;">
+              {% for post in object_list %}
+              <!-- Blog Grid -->
+              <div class="col-xs-12 col-sm-12 col-md-8  col-lg-12" style="position: absolute; left: 0px; top: 0px;">
+                <div class="blog-grid">
+                  
+                  <!-- <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.author.profile_picture.url }}"> </div> -->
+                  <div class="blog-content">
+                    <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.thumbnail.url }}"> </div>
+                    <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                    <ul class="post-meta">
+                      <li>By {{post.author.user.username }}</li>
+                      <li> {% for tag in tags %}
+                        <i class="fa fa-tags"></i><a href="{% url 'searchbytag' tags=tag.tags__title %}">{{ tag.tags__title }}</a>
+                      {% endfor %}</li>
+                      <li><i class="fa fa-clock-o"></i> {{ post.timestamp|timesince }} ago</li>
+                    </ul>
+                    <p>{{ post.overview|linebreaks|truncatechars:200 }}</p>
 
-                            <li class="active">
-                              <a data-toggle="tooltip" data-placement="bottom" data-original-title="Comments"><span>{{ obj.comment_count }}</span></a>
-                            </li>
-                            <li>
-                              <a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span>{{ obj.vote_count }}</span></a>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div class="col-md-10 col-sm-10  col-xs-12">
-      
-                          <p>{{ obj.overview|linebreaks|truncatechars:200 }}</p>
-                          <div class="pull-right tagcloud">
-                          {% for tag in tags %}
-                            <a href="{% url 'searchbytag' tags=tag.tags__title %}">{{ tag.tags__title }}</a>
-                          {% endfor %}
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-      
-                {% endfor %}
-                <!-- Question Listing End -->
+                  </div>
+                  <div class="blog-footer">
+                    <ul class="like-comment">
+                      <li><a href="#"><i class="icon-heart"></i>{{ post.vote_count }}</a>
+                      </li>
+                      <li><a href="#"><i class="fa fa fa-eye"></i>{{ post.view_count }}</a>
+                      </li>
+                      <li><a href="#"><i class="icon-chat"></i>{{ post.comment_count }}</a></li>
+                    </ul>
+                    <a href="{{ post.get_absolute_url }}" class="more-btn pull-right"><i class="fa fa-long-arrow-right"></i> MORE</a> </div>
+                </div>
               </div>
+              <!-- Blog Grid -->
+              {% endfor %}
 
-              <!-- Pagination View More -->
-              <div class="text-center clearfix">
-                 <!-- Pagination View More -->
-            {% if object_list.has_other_pages  %}
-            
-            <nav aria-label="Page navigation example" style="margin-left: 250px;">
-              <ul class="pagination pagination-template d-flex justify-content-center">
-                {% if object_list.has_previous %}                
-                <li class="page-item"><a href="?{{ page_request_var }}={{ object_list.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+            </div>
+            <!-- Blog Masonry Grid -->
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="text-center  section-padding-40">
+              <ul class="pagination ">
+                {% if page_obj.has_previous %}                
+                <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.previous_page_number }}"> <i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
                 {% endif %}
-                <li class="page-item"><a href="?{{ page_request_var }}={{ object_list.number }}" class="page-link active">{{ object_list.number }}</a></li>
-                {% if object_list.has_next %}
-                <li class="page-item"><a href="?{{ page_request_var }}={{ object_list.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.number }}" class="page-link active">{{ page_obj.number }}</a></li>
+                {% if page_obj.has_next %}
+                <li><a aria-label="Next" aria-hidden="true" href="?{{ page_request_var }}={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
                 {% endif %}
               </ul>
-            </nav>
-            
-            {% endif %}
-
-              <!-- Pagination View More End -->
-              </div>
-              <!-- Pagination View More End -->
-
-              <!-- Question Area Panel End -->
             </div>
+            {% endif %}
+            <div class="clearfix"></div>
+            <!-- Pagination End -->
           </div>
           <!-- Content Area Bar End -->
           {% include 'right_sidebar.html' with most_recent=most_recent category_count=category_count %}
