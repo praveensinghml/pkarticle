@@ -20,7 +20,7 @@
       <div class="container">
         <!-- title-section -->
         <div class="main-heading text-center">
-          <h2>Recent Articles</h2>
+          <h2><i class="icofont icon-ribbon"></i> Recent Articles</h2>
           <div class="slices"><span class="slice"></span><span class="slice"></span><span class="slice"></span>
           </div>
         </div>
@@ -31,10 +31,12 @@
           <div class="col-sm-12 col-xs-12 col-md-8"> 
 
             <!-- Blog Masonry Grid -->
-            <div id="posts-masonry" class="posts-masonry" style="position: relative; height: 800px;">
-              {% for post in object_list %}
+            <div id="posts-masonry" class="posts-masonry" style="position: relative; height: 1200px;">
+              
               <!-- Blog Grid -->
+             
               <div class="col-xs-12 col-sm-12 col-md-8  col-lg-12" style="position: absolute; left: 0px; top: 0px;">
+                {% for post in object_list %}
                 <div class="blog-grid">
                   
                   <!-- <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.author.profile_picture.url }}"> </div> -->
@@ -61,34 +63,31 @@
                     </ul>
                     <a href="{{ post.get_absolute_url }}" class="more-btn pull-right"><i class="fa fa-long-arrow-right"></i> MORE</a> </div>
                 </div>
+                {% endfor %}
+                <!-- Pagination -->
+                {% if is_paginated %}
+                <div class="text-center  section-padding-300">
+                  <ul class="pagination"  style="margin-left: 300px;">
+                    {% if page_obj.has_previous %}                
+                    <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.previous_page_number }}"> <i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                    {% endif %}
+                    <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.number }}" class="page-link active">{{ page_obj.number }}</a></li>
+                    {% if page_obj.has_next %}
+                    <li><a aria-label="Next" aria-hidden="true" href="?{{ page_request_var }}={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+                {% endif %}
+                <div class="clearfix"></div>
+                <!-- Pagination End -->
               </div>
               <!-- Blog Grid -->
-              {% endfor %}
-
             </div>
             <!-- Blog Masonry Grid -->
 
-            <!-- Pagination -->
-            {% if is_paginated %}
-            <div class="text-center  section-padding-40">
-              <ul class="pagination ">
-                {% if page_obj.has_previous %}                
-                <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.previous_page_number }}"> <i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                {% endif %}
-                <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.number }}" class="page-link active">{{ page_obj.number }}</a></li>
-                {% if page_obj.has_next %}
-                <li><a aria-label="Next" aria-hidden="true" href="?{{ page_request_var }}={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
-                {% endif %}
-              </ul>
-            </div>
-            {% endif %}
-            <div class="clearfix"></div>
-            <!-- Pagination End -->
           </div>
           <!-- Content Area Bar End -->
           {% include 'right_sidebar.html' with most_recent=most_recent category_count=category_count %}
-
-
           <div class="clearfix"></div>
         </div>
       </div>

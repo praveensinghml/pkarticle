@@ -135,7 +135,7 @@ class IndexView(View):
         most_recent = Post.objects.filter(featured=True).order_by('-timestamp')[:3]
         post_list = Post.objects.filter(featured=True).all()
         tags = get_tags_count()
-        paginator = Paginator(post_list, 5)
+        paginator = Paginator(post_list, 2)
         page_request_var = 'page'
         page = request.GET.get(page_request_var)
         try:
@@ -171,11 +171,11 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog.html'
     context_object_name = 'queryset'
-    paginate_by = 3
+    paginate_by =2
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
-        most_recent = Post.objects.order_by('-timestamp')[:3]
+        most_recent = Post.objects.filter(featured=True).order_by('-timestamp')[:3]
         tags = get_tags_count()
         context = super().get_context_data(**kwargs)
         context['most_related'] = most_recent

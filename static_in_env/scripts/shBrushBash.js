@@ -19,7 +19,7 @@
 	// CommonJS
 	typeof(require) != 'undefined' ? SyntaxHighlighter = require('shCore').SyntaxHighlighter : null;
 
-	function Brush()
+	function ()
 	{
 		var keywords =	'if fi then elif else for do done until while break continue case function return in eq ne ge le';
 		var commands =  'alias apropos awk basename bash bc bg builtin bzip2 cal cat cd cfdisk chgrp chmod chown chroot' +
@@ -49,11 +49,11 @@
 			];
 	}
 
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
-	Brush.aliases	= ['bash', 'shell'];
+	.prototype	= new SyntaxHighlighter.Highlighter();
+	.aliases	= ['bash', 'shell'];
 
-	SyntaxHighlighter.brushes.Bash = Brush;
+	SyntaxHighlighter.es.Bash = ;
 
 	// CommonJS
-	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
+	typeof(exports) != 'undefined' ? exports. =  : null;
 })();

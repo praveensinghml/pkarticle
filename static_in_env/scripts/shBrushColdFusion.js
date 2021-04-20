@@ -19,10 +19,10 @@
 	// CommonJS
 	typeof(require) != 'undefined' ? SyntaxHighlighter = require('shCore').SyntaxHighlighter : null;
 
-	function Brush()
+	function ()
 	{
 		// Contributed by Jen
-		// http://www.jensbits.com/2009/05/14/coldfusion-brush-for-syntaxhighlighter-plus
+		// http://www.jensbits.com/2009/05/14/coldfusion--for-syntaxhighlighter-plus
 	
 		var funcs	=	'Abs ACos AddSOAPRequestHeader AddSOAPResponseHeader AjaxLink AjaxOnLoad ArrayAppend ArrayAvg ArrayClear ArrayDeleteAt ' + 
 						'ArrayInsertAt ArrayIsDefined ArrayIsEmpty ArrayLen ArrayMax ArrayMin ArraySet ArraySort ArraySum ArraySwap ArrayToList ' + 
@@ -90,11 +90,11 @@
 			];
 	}
 
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
-	Brush.aliases	= ['coldfusion','cf'];
+	.prototype	= new SyntaxHighlighter.Highlighter();
+	.aliases	= ['coldfusion','cf'];
 	
-	SyntaxHighlighter.brushes.ColdFusion = Brush;
+	SyntaxHighlighter.es.ColdFusion = ;
 
 	// CommonJS
-	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
+	typeof(exports) != 'undefined' ? exports. =  : null;
 })();

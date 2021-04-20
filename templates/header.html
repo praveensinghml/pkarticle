@@ -32,7 +32,7 @@
 							 <i class="fa fa-caret-down"></i>
 							</span>
 						</a>
-						<ul class="dropdown-menu ">
+						<ul class="dropdown-menu">
 							<li><a href="{% url 'profile'%}"><i class=" icon-bargraph"></i> Dashboard</a></li>
 							<li><a href="{% url 'account_logout'%}"><i class="icon-lock"></i> Logout</a></li>
 						</ul>
@@ -54,40 +54,41 @@
           <span class="icon-bar"></span>
         </button>
         <!-- logo -->
-        <div style="margin-left: -1000px;">
-        <a href="/" class="navbar-brand">
-          <img class="img-responsive" alt="" src="{% static 'images/logo.png' %}">
-        </a>
-      </div>
+        <div style="margin-left: -400px;">
+          <a href="/" class="navbar-brand">
+            <img class="img-responsive" alt="" src="{% static 'images/logo.png' %}">
+          </a>
+          <br/>
+          <br/>
+        </div>
         <!-- search form -->
-        <form role="search" action="{% url 'search' %}" class="navbar-form pull-left">
-          <div class="icon-addon addon-lg">
-            <input type="text" name="q" id="q" class="form-control" placeholder="What are you Looking for..">
-            <label title="email" rel="tooltip" class="glyphicon glyphicon-search" for="q"></label>
-          </div>
-        </form>
-        <!-- header end -->
-      </div>
-      <!-- navigation menu -->
-      <div class="navbar-collapse collapse">
-        <!-- right bar -->
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="{% url 'post-list'%}">Browse Articles</a>
-          </li>
-          <!-- <li>
-            {% if user.is_authenticated %}
-              <div class="btn-nav"><a href="{% url 'post-create'%}" class="btn btn-primary btn-small navbar-btn">Post Articles</a>
+      <table>
+        <tr>
+          <td>
+            <form role="search" action="{% url 'search' %}" class="navbar-form pull-left">
+              <div class="icon-addon addon-lg">
+                <input type="text" name="q" id="q" class="form-control" placeholder="What are you Looking for..">
+                <label title="email" rel="tooltip" class="glyphicon glyphicon-search" for="q"></label>
               </div>
-            {% else %}
-            <div class="btn-nav">
-              <a href="{% url 'account_login' %}" class="btn btn-primary btn-small navbar-btn"> Login to Post Article</a>
-            </div>
-            {% endif %}
-          </li> -->
-        </ul>
+            </form>
+          </td>
+          <td>
+          <!-- header end -->
+          {% if user.is_authenticated %}
+          <div class="btn-nav"><a href="{% url 'post-create'%}" class="btn btn-primary btn-small navbar-btn">Post Articles</a>
+          </div>
+          {% else %}
+          <div class="btn-nav">
+            <a href="{% url 'account_login' %}" class="btn btn-primary btn-small navbar-btn"> Login to Post Article</a>
+          </div>
+          {% endif %}
+          </td>
+          <td><div class="btn-nav"></div><a href="{% url 'post-list'%}" class="btn btn-danger btn-small navbar-btn">Browse Articles</a></div></td>
+        </tr>
+      </table>
+        
+        
       </div>
-      <!-- navigation menu end -->
-      <!--/.navbar-collapse -->
     </div>
   </div>
   <!-- HEADER Navigation End -->

@@ -11,20 +11,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-            <h1>Latest Blogs &amp; Articles</h1>
+            <h1><i class="icofont icon-ribbon"></i>Latest Blogs &amp; Articles</h1>
           </div>
-          <!-- end col -->
-          <div class="col-md-6 col-sm-5 co-xs-12 text-right">
-            <div class="bread">
-              <ol class="breadcrumb">
-                <li><a href="#">Home</a>
-                </li>
-                <li class="active">Blogs</li>
-              </ol>
-            </div>
-            <!-- end bread -->
-          </div>
-          <!-- end col -->
+          
         </div>
         <!-- end row -->
       </div>
@@ -43,11 +32,12 @@
           <div class="col-sm-12 col-xs-12 col-md-8"> 
 
             <!-- Blog Masonry Grid -->
-            <div id="posts-masonry" class="posts-masonry" style="position: relative; height: 800px;">
-              {% for post in queryset %}
-              <!-- Blog Grid -->
+            <div id="posts-masonry" class="posts-masonry" style="position: relative; height: 1200px;">
+              
               <div class="col-xs-12 col-sm-12 col-md-8  col-lg-12" style="position: absolute; left: 0px; top: 0px;">
-                <div class="blog-grid">
+              {% for post in queryset %}
+                <!-- Blog Grid -->
+               <div class="blog-grid">
                  <div class="blog-content">
                      <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.thumbnail.url }}"> </div>
                     <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
@@ -71,17 +61,12 @@
                     </ul>
                     <a href="{{ post.get_absolute_url }}" class="more-btn pull-right"><i class="fa fa-long-arrow-right"></i> MORE</a> </div>
                 </div>
-              </div>
               <!-- Blog Grid -->
               {% endfor %}
-
-            </div>
-            <!-- Blog Masonry Grid -->
-
             <!-- Pagination -->
             {% if is_paginated %}
-            <div class="text-center  section-padding-40">
-              <ul class="pagination ">
+            <div class="text-center  section-padding-300">
+              <ul class="pagination" style="margin-left: 300px;">
                 {% if page_obj.has_previous %}                
                 <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.previous_page_number }}"> <i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
                 {% endif %}
@@ -92,13 +77,16 @@
               </ul>
             </div>
             {% endif %}
-            <div class="clearfix"></div>
             <!-- Pagination End -->
+
+              </div>
+            </div>
+            <!-- Blog Masonry Grid -->
           </div>
           <!-- Left Content End -->
 
           <!-- Blog Right Sidebar -->
-          {% include 'right_sidebar.html' with most_recent=related_article category_count=category_count tags=tags %}
+          {% include 'right_sidebar.html' with most_recent=most_related category_count=category_count tags=tags %}
 
 
         </div>

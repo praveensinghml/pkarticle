@@ -81,7 +81,7 @@
 	Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['php'];
 
-	SyntaxHighlighter.brushes.Php = Brush;
+	;
 
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
