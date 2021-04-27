@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import CommentForm, PostForm
-from .models import Post, Author, PostView
+from .models import Post, Author, PostView,Comment
 from marketing.forms import EmailSignupForm
 from marketing.models import Signup
 from django.urls import reverse_lazy, reverse
@@ -299,6 +299,33 @@ class PostDeleteView(DeleteView):
     success_url = '/blog'
     template_name = 'post_confirm_delete.html'
 
+class user_dashboard(View):
+     def get(self,request):
+         count=0
+         com_count=0 
+         user=request.user
+         author=get_author(request.user) 
+         my_post_count=post_count(get_author(request.user))
+         my_published_post=Post.objects.filter(author=author)
+         for x in my_published_post:
+               com_count+= Comment.objects.filter(post=x).count()
+                   
+            
+         for n in Post.objects.filter(author=author):
+            count += n.votes.count()
+
+         context={'user':user ,
+                 'author':author,
+                 'total_votes':count,
+                 'post_count':my_post_count,
+                 'my_published_post':my_published_post,
+                 'total_comments':com_count}
+         
+         return render(request,'account/profile_temp.html',context) 
+
+def post_count(user_id):
+  my_post=Post.objects.filter(author=user_id).count()
+  return my_post
 
 def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
