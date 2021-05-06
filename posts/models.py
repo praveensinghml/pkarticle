@@ -21,7 +21,7 @@ class Author(models.Model):
     aboutme = models.CharField(max_length=300)
     desination = models.CharField(max_length=100)
     profile_picture = models.ImageField(blank=True,null=True)
-   
+
 
     def __str__(self):
         return self.user.username
