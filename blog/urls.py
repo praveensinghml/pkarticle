@@ -17,7 +17,12 @@ from posts.views import (
     PostUpdateView,
     PostDeleteView,
     ContactView,
+<<<<<<< HEAD
     upload
+=======
+    check,
+    user_dashboard  
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
     )
 from marketing.views import email_list_signup
 
@@ -48,7 +53,7 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('allauth.urls')),
     path('accounts/profile/',
-         TemplateView.as_view(template_name='account/profile.html'),
+         user_dashboard.as_view(),
          name='profile')
 
 ]
@@ -58,3 +63,4 @@ if settings.DEBUG:
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+                           

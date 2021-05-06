@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+from tinymce.models import HTMLField
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -16,10 +20,15 @@ class PostView(models.Model):
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+<<<<<<< HEAD
     authorname = models.CharField(max_length=100)
     aboutme = models.CharField(max_length=300)
     desination = models.CharField(max_length=100)
     profile_picture = models.ImageField()
+=======
+    profile_picture = models.ImageField(blank=True,null=True)
+   
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
 
     def __str__(self):
         return self.user.username

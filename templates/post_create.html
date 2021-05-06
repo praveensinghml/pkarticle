@@ -78,6 +78,7 @@
 
 
 {% block content %}
+<<<<<<< HEAD
 <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>
@@ -159,6 +160,8 @@
       });
     });
 </script>
+=======
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
 <section class="section-padding-80 white" id="post-question">
       <div class="container">
         <div class="row">
@@ -167,12 +170,19 @@
             <div class="box-panel">
                 <h2>{{ title }} an article</h2>
                 {{ form.media }}
+<<<<<<< HEAD
                 <form method="POST" action="/create/" enctype="multipart/form-data">
                   {% csrf_token %}
                   {{ form|crispy }}
                   <input name="image" type="file" id="upload" style="display: none;"/>
 
                     <button class="btn btn-primary"  id="sub" type="submit">Submit</button>
+=======
+                <form method="POST" action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-primary" type="submit">Submit</button>
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
                 </form>
             </div>
            </div>
