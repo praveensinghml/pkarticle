@@ -17,12 +17,8 @@ from posts.views import (
     PostUpdateView,
     PostDeleteView,
     ContactView,
-<<<<<<< HEAD
-    upload
-=======
-    check,
-    user_dashboard  
->>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
+    upload,
+    user_dashboard
     )
 from marketing.views import email_list_signup
 
