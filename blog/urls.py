@@ -17,7 +17,7 @@ from posts.views import (
     PostUpdateView,
     PostDeleteView,
     ContactView,
-    check
+    upload
     )
 from marketing.views import email_list_signup
 
@@ -31,7 +31,7 @@ urlpatterns = [
     path('email-signup/', email_list_signup, name='email-list-signup'),
     # path('create/', post_create, name='post-create'),
     path('create/', PostCreateView.as_view(), name='post-create'),
-    path('check/',check),
+    path('upload/', upload, name='upload_img'),
     # path('post/<id>/', post_detail, name='post-detail'),
     path('post/<str:slug>-<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     # path('post/<id>/update/', post_update, name='post-update'),

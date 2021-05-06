@@ -15,6 +15,12 @@ from django.template.defaultfilters import slugify
 from django.core.mail import send_mail
 from django.conf import settings
 
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from PIL import Image
+from django.http import HttpResponse
+import uuid
+
 
 form = EmailSignupForm()
 
@@ -38,7 +44,6 @@ def get_tags_count():
         .values('tags__title') \
         .annotate(Count('tags__title'))
     return queryset
-
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
@@ -204,12 +209,11 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
-        vote_count = get_object_or_404(Post, id= self.kwargs['pk'])
-        tags = get_object_or_404(Post, id= self.kwargs['pk'])
+        post = get_object_or_404(Post, id= self.kwargs['pk'])
         rhs_tags = get_tags_count()
-        most_relative = Post.objects .order_by('-timestamp')[:3]
+        most_relative = Post.objects.order_by('-timestamp')[:3]
         liked = False
-        if vote_count.votes.filter(id = self.request.user.id).exists():
+        if post.votes.filter(id = self.request.user.id).exists():
             liked = True
 
         context = super().get_context_data(**kwargs)
@@ -217,9 +221,10 @@ class PostDetailView(DetailView):
         context['page_request_var'] = "page"
         context['category_count'] = category_count
         context['liked'] = liked
-        context['vote_count'] = vote_count.vote_count
-        context['tags'] = tags.get_tags[0],
-        context['rhs_tags'] = rhs_tags[0],
+        context['vote_count'] = post.vote_count
+        context['tags'] = post.get_tags[0],
+        context['rhs_tags'] = rhs_tags[0]
+        context['author_details'] = post.get_authordetails
         
         context['form'] = self.form
         return context
@@ -236,7 +241,6 @@ class PostDetailView(DetailView):
             }))
 
 
-
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_create.html'
@@ -247,20 +251,39 @@ class PostCreateView(CreateView):
         context['title'] = 'Create'
         return context
 
+   
     def form_valid(self, form):
-        form.instance.author = get_author(self.request.user)
-        form.save()
-        print('get')
-        return redirect(reverse("post-detail", kwargs={
-            'pk': form.instance.pk,
-            'slug': slugify(form.instance.title)
-        }))
- 
-def check(request):
-    if request.method=="POST":
-        print('get')
-        return render(request,'blog.html')
+        if self.request.user.is_authenticated:
+            form.instance.author = get_author(self.request.user)
+            form.save()
+            return redirect(reverse("post-detail", kwargs={
+                'pk': form.instance.pk,
+                'slug': slugify(form.instance.title)
+            }))
+        else:
+            return redirect("/accounts/login")
 
+
+
+ 
+
+def upload(request):
+    try:
+        file = request.FILES['docf']
+        updatedImgName = str(uuid.uuid4())
+        imgExt = file.name.split('.')[1]
+        img = Image.open(file)
+        img.thumbnail((500, 500), Image.ANTIALIAS)
+        try:
+            img.save(settings.MEDIA_ROOT+"/blog_img/" + updatedImgName+"."+imgExt)
+            print("img save pass")
+        except:
+            print("img.save error")
+        path = "/media/blog_img/" + updatedImgName+"."+imgExt
+
+        return JsonResponse({"imgpath": path}, status=200)
+    except Exception:
+        return HttpResponse("error")
 
 class PostUpdateView(UpdateView):
     model = Post

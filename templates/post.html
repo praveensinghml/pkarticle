@@ -1,229 +1,303 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="ScriptsBundle">
+    <title>{{ post.title }}</title>
+    <!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/et-line-fonts.css' %}">
+        <!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.style.css' %}">
+    <!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+    <!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
+    <link type="text/css" rel="Stylesheet" href="{% static 'css/styles/shCoreDefault.css' %}" />
+    <!-- =-=-=-=-=-=-= Css Animation =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
+    <!-- =-=-=-=-=-=-= Hover Dropdown =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-dropdownhover.min.css' %}" />
+    <!-- JavaScripts -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     -->
+     <meta name="title" content="{{ post.title }}">
+     <meta name="description" content="{{ post.overview }}">
+     <meta name="robots" content="index, nofollow">
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <meta name="language" content="English">
+     <meta name="revisit-after" content="1 days">
+     <meta name="author" content="{{ post.author.user.username }}">
+ 
+     <meta property="og:site_name" content="Learn DataScience and Machine learning by DataScienceMastery"/>
+     <meta property="og:type" content="article" />
+     <meta property="og:title" content="{{ post.title }}" />
+     <meta property="og:description" content="{{ post.overview }}" />
+     <meta property="og:url" content="{{ post.get_absolute_url }}"/>
+     {% for tag in tags %}
+     <meta property="article:tag" content="{{ tag }}"/>
+     {% endfor %}
+     {% for cat in post.categories.all %}
+     <meta property="article:tag" content="{{ cat }}"/>
+     {% endfor %}
+
+
+  </head>
+{% endblock head %}
+
 {% block content %}
+<script>
+    faceBook = function(){
+        url = 'https://facebook.com/sharer.php?display=popup&u=' + window.location.href;
+        options = 'toolbar=0,status=0,resizable=1,width=626,height=436';
+        window.open(url,'sharer',options);
+    }
+    </script>
 
-
-  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
-  <div class="main-content-area">
-
-    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
-    <section class="page-title">
+<!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+<div class="main-content-area">
+    
+  <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+  <section class="page-title">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-            <h1>Articles in Detials</h1>
-          </div>
+          <div class="row">
+              <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+                  <h1>Articles in Detials</h1>
+              </div>
           </div>
           <!-- end col -->
-        </div>
-        <!-- end row -->
       </div>
-      <!-- end container -->
-    </section>
+  </section>
+      <!-- end row -->
+<!-- end container -->
 
-    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+<!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
 
-    <!-- =-=-=-=-=-=-= Question Details =-=-=-=-=-=-= -->
+<!-- =-=-=-=-=-=-= Question Details =-=-=-=-=-=-= -->
 
-    <section id="blog" class="custom-padding white">
+  <section id="blog" class="custom-padding white">
       <div class="container">
-       <div class="sharebox"><div class="sm_icons"><ul><ul><style>.sharebox{color:#333;padding:0}.sharebox h1{font-size:1.25em;font-weight:600;padding:15px}.sharebox p{font-size:1rem;line-height:1.25;font-weight:800;color:#333;margin-bottom:10px}.sharebox p:nth-child(2){font-weight:400;margin-bottom:20px;font-size:.75rem}.sharebox p.credit{padding:15px 0;margin:0}.sharebox p.credit span{color:#4d73c0;font-weight:700}.sharebox p.gain{font-weight:700}.sharebox .sm_icons li,.sharebox .sm_icons ul{list-style:none;padding:0;margin:0;display:-webkit-box;display:-ms-flexbox;display:flex}.sharebox .sm_icons ul{-ms-flex-wrap:wrap;flex-wrap:wrap;width:100%}.sharebox .sm_icons li{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.sharebox .sm_icons li a{display:block;width:42px;height:42px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='none' viewBox='0 0 350 100'%3E%3Cstyle%3E .D%7Bfill:%23fff%7D %3C/style%3E%3Cuse fill='%23e8e8e8' xlink:href='%23B'/%3E%3Cpath fill='%233b5998' d='M25 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M27 41V27h5l1-6h-6v-2c0-3 2-4 4-4h2V9h-4c-5 0-8 3-8 8v4h-4v6h4v14h6z' class='D'/%3E%3Cpath fill='%2357bb63' d='M75 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M75 40l-7-2-9 3 3-9a15 15 0 01-2-8c0-8 7-15 15-15s16 7 16 15-7 16-16 16zm0-29c-7 0-13 6-13 13 0 3 1 6 3 8l-2 5 5-2a13 13 0 007 2c7 0 13-5 13-13s-5-13-13-13zm8 17h-1l-2-2h-1l-1 2h-1l-3-2-2-2v-1-1h1v-1l-1-3-1-1h-1l-1 1-1 3 1 4s3 4 7 6 4 1 4 1l3-2v-2z' class='D'/%3E%3Cpath fill='url(%23A)' d='M125 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cg class='D'%3E%3Cpath d='M131 41h-12a10 10 0 01-10-10V19a10 10 0 0110-10h12c5 0 10 4 10 10v12a10 10 0 01-10 10zm-12-30c-5 0-8 3-8 8v12c0 4 3 8 8 8h12c5 0 8-4 8-8V19c0-5-3-8-8-8h-12zm6 22c-5 0-8-4-8-8s3-8 8-8 8 3 8 8-3 8-8 8zm0-15a7 7 0 00-7 7 7 7 0 1014 0 7 7 0 00-7-7z'/%3E%3Cuse y='-50' xlink:href='%23C'/%3E%3C/g%3E%3Cpath fill='%231cb7eb' d='M225 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M238 17l-3 1 2-4-3 2-4-2c-3 0-5 3-5 6v1c-5 0-9-2-11-6l-1 3 2 5-2-1c0 3 2 5 4 6h-1-1c1 2 2 4 5 4l-7 2h-1c2 2 5 3 8 3 10 0 15-9 15-17l3-3z' class='D'/%3E%3Cpath fill='%231387c8' d='M275 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath fill='%23ff5700' d='M325 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M263 20h5v17h-5V20zm2-8a3 3 0 013 3 3 3 0 01-3 3 3 3 0 01-3-3c0-2 2-3 3-3zm6 8h5v3c1-2 3-3 5-3 6 0 7 3 7 8v9h-6v-8c0-2 0-4-2-4-3 0-3 2-3 4v8h-6V20z' class='D'/%3E%3Cpath fill='%23ca2028' d='M175 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath fill='%23f1f2f2' d='M178 32l-4-2c-1 4-2 8-5 10-1-6 1-11 2-16-1-3 1-9 4-8 5 2-4 11 2 12 6 2 9-10 5-14-5-5-16 0-15 8 1 2 3 2 1 5-3-1-4-4-4-7 0-6 5-10 10-11 7-1 13 3 14 9 1 7-3 14-10 14z'/%3E%3Cpath fill-rule='evenodd' d='M342 24a4 4 0 00-6-3l-9-2 1-6 5 2 3 3c2 0 4-2 4-4s-2-3-4-3l-2 2-6-2a1 1 0 00-1 1l-2 7-10 2a4 4 0 00-2 0c-2 0-4 1-4 3l2 4v1c0 2 1 5 4 7s7 3 10 3 8-1 11-3 4-5 4-7a7 7 0 000-1 4 4 0 002-4zm-6-11a2 2 0 012 1 2 2 0 11-3 0 2 2 0 011-1zm-18 14c0-1 1-2 3-2s2 1 2 2l-2 2-3-2zm13 6c-1 2-3 2-5 2h-1c-2 0-4 0-5-2v-1a1 1 0 011 0l4 1h1l4-1h1a1 1 0 010 1zm-1-4l-2-2 2-2 3 2c0 1-1 2-3 2z' class='D'/%3E%3Cdefs%3E%3Cpath id='B' d='M125 99a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath id='C' d='M134 68l-2-2 2-2a2 2 0 012 2l-2 2zm0-3l-1 1 1 1 1-1-1-1z'/%3E%3CradialGradient id='A' cx='0' cy='0' r='1' gradientTransform='translate(105 39) scale(55.6863)' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23f9ed32'/%3E%3Cstop offset='.3' stop-color='%23f59f4f'/%3E%3Cstop offset='.7' stop-color='%23ee2a7b'/%3E%3Cstop offset='.7' stop-color='%23e32a81'/%3E%3Cstop offset='.7' stop-color='%23c72a91'/%3E%3Cstop offset='.8' stop-color='%23982aab'/%3E%3Cstop offset='.9' stop-color='%23582ace'/%3E%3Cstop offset='1' stop-color='%23072afb'/%3E%3Cstop offset='1' stop-color='%23002aff'/%3E%3C/radialGradient%3E%3C/defs%3E%3C/svg%3E") no-repeat;background-size:294px;overflow:hidden;margin:0 2px}.sharebox .sm_icons li a:hover{margin-top:-5px}.sharebox .sm_icons li a.off{pointer-events:none}.sharebox .sm_icons li a.off:hover{margin-top:0}.sharebox .sm_icons li a.facebook{background-position:0 0}.sharebox .sm_icons li a.whatsapp{background-position:-42px 0;background-color:#57bb63}.sharebox .sm_icons li a.instagram{background-position:-84px 0}.sharebox .sm_icons li a.pinterest{background-position:-126px 0;background-color:#ca2028}.sharebox .sm_icons li a.twitter{background-position:-168px 0;background-color:#1cb7eb}.sharebox .sm_icons li a.linkedin{background-position:-210px 0;background-color:#1387c8}.sharebox .sm_icons li a.reddit{background-position:-252px 0;background-color:#ff5700}.sharebox .sm_icons li a.facebook.off{background-position:0 -50px}.sharebox .sm_icons li a.whatsapp.off{background-position:-42px -42px}.sharebox .sm_icons li a.instagram.off{background-position:-84px -42px}.sharebox .sm_icons li a.pinterest.off{background-position:-126px -42px}.sharebox .sm_icons li a.twitter.off{background-position:-168px -42px}.sharebox .sm_icons li a.linkedin.off{background-position:-210px -42px}.sharebox .sm_icons li a.reddit.off{background-position:-252px -42px}@media (max-width:414px){.sharebox h1{font-size:1.25em;padding:0 15px 15px}.sharebox{padding:15px 10px}.sharebox .sm_icons li{-webkit-box-flex:0;-ms-flex:0 0 50px;flex:0 0 50px;margin:0 0 10px}}</style>
-                <li><button aria-label="whatsapp" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="whatsapp" data-test="shareBox_whatsapp" rel="nofollow"></a></button></li>
-                <li><button aria-label="pinterest" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="pinterest" data-test="shareBox_pinterest" rel="nofollow"></a></button></li>
-                <li><button aria-label="twitter" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="twitter" data-test="shareBox_twitter" rel="nofollow"></a></button></li>
-                <li><button aria-label="linkedin" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="linkedin" data-test="shareBox_linkedin" rel="nofollow"></a></button></li>
-                </ul></ul>
+          <div class="sharebox">
+              <div class="sm_icons"><b>Share this blog: ->></b> <ul><ul><style>.sharebox{color:#333;padding:0}.sharebox h1{font-size:1.25em;font-weight:600;padding:15px}.sharebox p{font-size:1rem;line-height:1.25;font-weight:800;color:#333;margin-bottom:10px}.sharebox p:nth-child(2){font-weight:400;margin-bottom:20px;font-size:.75rem}.sharebox p.credit{padding:15px 0;margin:0}.sharebox p.credit span{color:#4d73c0;font-weight:700}.sharebox p.gain{font-weight:700}.sharebox .sm_icons li,.sharebox .sm_icons ul{list-style:none;padding:0;margin:0;display:-webkit-box;display:-ms-flexbox;display:flex}.sharebox .sm_icons ul{-ms-flex-wrap:wrap;flex-wrap:wrap;width:100%}.sharebox .sm_icons li{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.sharebox .sm_icons li a{display:block;width:42px;height:42px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='none' viewBox='0 0 350 100'%3E%3Cstyle%3E .D%7Bfill:%23fff%7D %3C/style%3E%3Cuse fill='%23e8e8e8' xlink:href='%23B'/%3E%3Cpath fill='%233b5998' d='M25 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M27 41V27h5l1-6h-6v-2c0-3 2-4 4-4h2V9h-4c-5 0-8 3-8 8v4h-4v6h4v14h6z' class='D'/%3E%3Cpath fill='%2357bb63' d='M75 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M75 40l-7-2-9 3 3-9a15 15 0 01-2-8c0-8 7-15 15-15s16 7 16 15-7 16-16 16zm0-29c-7 0-13 6-13 13 0 3 1 6 3 8l-2 5 5-2a13 13 0 007 2c7 0 13-5 13-13s-5-13-13-13zm8 17h-1l-2-2h-1l-1 2h-1l-3-2-2-2v-1-1h1v-1l-1-3-1-1h-1l-1 1-1 3 1 4s3 4 7 6 4 1 4 1l3-2v-2z' class='D'/%3E%3Cpath fill='url(%23A)' d='M125 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cg class='D'%3E%3Cpath d='M131 41h-12a10 10 0 01-10-10V19a10 10 0 0110-10h12c5 0 10 4 10 10v12a10 10 0 01-10 10zm-12-30c-5 0-8 3-8 8v12c0 4 3 8 8 8h12c5 0 8-4 8-8V19c0-5-3-8-8-8h-12zm6 22c-5 0-8-4-8-8s3-8 8-8 8 3 8 8-3 8-8 8zm0-15a7 7 0 00-7 7 7 7 0 1014 0 7 7 0 00-7-7z'/%3E%3Cuse y='-50' xlink:href='%23C'/%3E%3C/g%3E%3Cpath fill='%231cb7eb' d='M225 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M238 17l-3 1 2-4-3 2-4-2c-3 0-5 3-5 6v1c-5 0-9-2-11-6l-1 3 2 5-2-1c0 3 2 5 4 6h-1-1c1 2 2 4 5 4l-7 2h-1c2 2 5 3 8 3 10 0 15-9 15-17l3-3z' class='D'/%3E%3Cpath fill='%231387c8' d='M275 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath fill='%23ff5700' d='M325 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath d='M263 20h5v17h-5V20zm2-8a3 3 0 013 3 3 3 0 01-3 3 3 3 0 01-3-3c0-2 2-3 3-3zm6 8h5v3c1-2 3-3 5-3 6 0 7 3 7 8v9h-6v-8c0-2 0-4-2-4-3 0-3 2-3 4v8h-6V20z' class='D'/%3E%3Cpath fill='%23ca2028' d='M175 49a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath fill='%23f1f2f2' d='M178 32l-4-2c-1 4-2 8-5 10-1-6 1-11 2-16-1-3 1-9 4-8 5 2-4 11 2 12 6 2 9-10 5-14-5-5-16 0-15 8 1 2 3 2 1 5-3-1-4-4-4-7 0-6 5-10 10-11 7-1 13 3 14 9 1 7-3 14-10 14z'/%3E%3Cpath fill-rule='evenodd' d='M342 24a4 4 0 00-6-3l-9-2 1-6 5 2 3 3c2 0 4-2 4-4s-2-3-4-3l-2 2-6-2a1 1 0 00-1 1l-2 7-10 2a4 4 0 00-2 0c-2 0-4 1-4 3l2 4v1c0 2 1 5 4 7s7 3 10 3 8-1 11-3 4-5 4-7a7 7 0 000-1 4 4 0 002-4zm-6-11a2 2 0 012 1 2 2 0 11-3 0 2 2 0 011-1zm-18 14c0-1 1-2 3-2s2 1 2 2l-2 2-3-2zm13 6c-1 2-3 2-5 2h-1c-2 0-4 0-5-2v-1a1 1 0 011 0l4 1h1l4-1h1a1 1 0 010 1zm-1-4l-2-2 2-2 3 2c0 1-1 2-3 2z' class='D'/%3E%3Cdefs%3E%3Cpath id='B' d='M125 99a24 24 0 100-48 24 24 0 000 48z'/%3E%3Cpath id='C' d='M134 68l-2-2 2-2a2 2 0 012 2l-2 2zm0-3l-1 1 1 1 1-1-1-1z'/%3E%3CradialGradient id='A' cx='0' cy='0' r='1' gradientTransform='translate(105 39) scale(55.6863)' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23f9ed32'/%3E%3Cstop offset='.3' stop-color='%23f59f4f'/%3E%3Cstop offset='.7' stop-color='%23ee2a7b'/%3E%3Cstop offset='.7' stop-color='%23e32a81'/%3E%3Cstop offset='.7' stop-color='%23c72a91'/%3E%3Cstop offset='.8' stop-color='%23982aab'/%3E%3Cstop offset='.9' stop-color='%23582ace'/%3E%3Cstop offset='1' stop-color='%23072afb'/%3E%3Cstop offset='1' stop-color='%23002aff'/%3E%3C/radialGradient%3E%3C/defs%3E%3C/svg%3E") no-repeat;background-size:294px;overflow:hidden;margin:0 2px}.sharebox .sm_icons li a:hover{margin-top:-5px}.sharebox .sm_icons li a.off{pointer-events:none}.sharebox .sm_icons li a.off:hover{margin-top:0}.sharebox .sm_icons li a.facebook{background-position:0 0}.sharebox .sm_icons li a.whatsapp{background-position:-42px 0;background-color:#57bb63}.sharebox .sm_icons li a.instagram{background-position:-84px 0}.sharebox .sm_icons li a.pinterest{background-position:-126px 0;background-color:#ca2028}.sharebox .sm_icons li a.twitter{background-position:-168px 0;background-color:#1cb7eb}.sharebox .sm_icons li a.linkedin{background-position:-210px 0;background-color:#1387c8}.sharebox .sm_icons li a.reddit{background-position:-252px 0;background-color:#ff5700}.sharebox .sm_icons li a.facebook.off{background-position:0 -50px}.sharebox .sm_icons li a.whatsapp.off{background-position:-42px -42px}.sharebox .sm_icons li a.instagram.off{background-position:-84px -42px}.sharebox .sm_icons li a.pinterest.off{background-position:-126px -42px}.sharebox .sm_icons li a.twitter.off{background-position:-168px -42px}.sharebox .sm_icons li a.linkedin.off{background-position:-210px -42px}.sharebox .sm_icons li a.reddit.off{background-position:-252px -42px}@media (max-width:414px){.sharebox h1{font-size:1.25em;padding:0 15px 15px}.sharebox{padding:15px 10px}.sharebox .sm_icons li{-webkit-box-flex:0;-ms-flex:0 0 50px;flex:0 0 50px;margin:0 0 10px}}</style>
+                  <li><button aria-label="whatsapp" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="whatsapp" data-test="shareBox_whatsapp" rel="nofollow"></a></button></li>
+                  <li><button onclick="faceBook()" aria-label="facebook" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="facebook" data-test="shareBox_facebook" rel="nofollow"></a></button></li>
+                  <li><button aria-label="twitter" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="twitter" data-test="shareBox_twitter" rel="nofollow"></a></button></li>
+                  <li><button aria-label="linkedin" class="react-share__ShareButton" style="background-color: transparent; border: none; padding: 0px; font: inherit; color: inherit; cursor: pointer;"><a class="linkedin" data-test="shareBox_linkedin" rel="nofollow"></a></button></li>
+              </ul></ul>
               </div>
-            </div>
-        <!-- Row -->
-        <div class="row">
-          <!-- Left Side Content -->
-          <div class="col-sm-12 col-xs-12 col-md-8">
-            <!-- Blog Grid -->
-            <div class="blog-detial">
-              <div class="blog-image"><img alt="{{ post.title }}" class="img-responsive" src="{{ post.thumbnail.url }}"></div>
-              <div class="blog-content">
-                <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
-                {% if user.is_authenticated %}
-                <form id="votefrm" name="votefrm">
-                  {% csrf_token %}
-                  <input type="hidden" id="hidden_postid" name="hidden_postid" value="{{ post.id }}"/>
-                  {% if liked %}
-                  <div>
-                    <button type="submit"
-                            name="post_id"
-                            value="{{ post.id }}"
-                            class="vote-btn" 
-                            data-default-text="Vote This Dish Up!">
-                            <i class="icon-heart"></i>
-                      </button>
-                      <span class="vote_count" id="vote_count">{{ vote_count }} </span>
-                  </div>
-                  {% else %}
-                  <div>
-                      <button type="submit"
-                      name="post_id"
-                      value="{{ post.id }}"
-                      class="vote-btn" 
-                      data-default-text="Vote This Dish Up!">
-                      <i class="icon-heart"></i>
-                    </button>
-                    <span class="vote_count" id="vote_count">{{ vote_count }} </span>
-                  </div>
-                  {% endif %}
-                </form>
-                {% else %}
-                <div>
-                  <a href="{% url 'account_login'%}?next={{ request.path }}">
-                    <svg width="25" height="25" aria-label="clap"><g fill-rule="evenodd"><path d="M13.74 1l.76 2.97.76-2.97zM18.63 2.22l-1.43-.47-.4 3.03zM11.79 1.75l-1.43.47 1.84 2.56zM24.47 14.3L21.45 9c-.29-.43-.69-.7-1.12-.78a1.16 1.16 0 0 0-.91.22c-.3.23-.48.52-.54.84l.05.07 2.85 5c1.95 3.56 1.32 6.97-1.85 10.14a8.46 8.46 0 0 1-.55.5 5.75 5.75 0 0 0 3.36-1.76c3.26-3.27 3.04-6.75 1.73-8.91M14.58 10.89c-.16-.83.1-1.57.7-2.15l-2.5-2.49c-.5-.5-1.38-.5-1.88 0-.18.18-.27.4-.33.63l4.01 4z"></path><path d="M17.81 10.04a1.37 1.37 0 0 0-.88-.6.81.81 0 0 0-.64.15c-.18.13-.71.55-.24 1.56l1.43 3.03a.54.54 0 1 1-.87.61L9.2 7.38a.99.99 0 1 0-1.4 1.4l4.4 4.4a.54.54 0 1 1-.76.76l-4.4-4.4L5.8 8.3a.99.99 0 0 0-1.4 0 .98.98 0 0 0 0 1.39l1.25 1.24 4.4 4.4a.54.54 0 0 1 0 .76.54.54 0 0 1-.76 0l-4.4-4.4a1 1 0 0 0-1.4 0 .98.98 0 0 0 0 1.4l1.86 1.85 2.76 2.77a.54.54 0 0 1-.76.76L4.58 15.7a.98.98 0 0 0-1.4 0 .99.99 0 0 0 0 1.4l5.33 5.32c3.37 3.37 6.64 4.98 10.49 1.12 2.74-2.74 3.27-5.54 1.62-8.56l-2.8-4.94z"></path></g></svg>
-                  </a>
-                  <span class="badge">{{ vote_count }}</span>
-                </div>
-                {% endif %}
-                </form>
-                <ul class="post-meta">
-                  <li>By {{ post.author.user.username }}</li>
-                  {% for cat in post.categories.all %}
-                    <li><a href="{% url 'searchbycat' category=cat %}">{{ cat }}</a></li>
-                  {% endfor %}
-                  <li><i class="fa fa-clock-o" aria-hidden="true"></i> {{ post.timestamp|timesince }} ago</li>
-                  <li><i class="fa fa fa-eye" aria-hidden="true"></i> {{ post.view_count }}</li>
-                  <li><i class="icon-chat"></i>&nbsp;&nbsp;{{ post.comment_count }}</li>
-                </ul>
-                {% if user.is_authenticated %}
-                <div>
-                  <a href="{% url 'post-update' pk=post.pk %}">Update</a>
-                  <a href="{% url 'post-delete' pk=post.pk %}">Delete</a>
-                </div>
-               {% endif %}
-
-
-              </div>
-              <h5 style="color: rgb(51, 47, 45);">{{ post.overview }}</h5>
-
-              <div>
-                {{ post.content | safe }}
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="entry-footer">
-                <div class="post-admin">
-                  <i class="icon-profile-male"></i>Posted by<a href="#">{{ post.author.user.username }}</a>
-                </div>
-                <div class="tags">
-                  <i class="fa fa-tags"></i>
-                  {% for tag in tags %}
-                    <a href="{% url 'searchbytag' tags=tag %}">{{ tag }}</a>
-                  {% endfor %}
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
-                {% if post.previous_post %}
-                <a href="{{ post.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
-                    <div class="icon prev"><i class="fa fa-angle-left"></i></div>
-                    <div class="text"><strong class="text-primary">Previous Post </strong>
-                      <h6>{{ post.previous_post.title }}</h6>
-                    </div>
-                </a>
-                {% endif %}
-                {% if post.next_post %}
-                <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
-                    <div class="text"><strong class="text-primary">Next Post </strong>
-                      <h6>{{ post.next_post.title }}</h6>
-                    </div>
-                    <div class="icon next"><i class="fa fa-angle-right">   </i></div>
-                </a>
-                {% endif %}
-                </div>
-
-              <div class="blog-section">
-                <div class="blog-heading">
-                  <h2>Comments ({{ post.comments.count }})</h2>
-                  <hr>
-                </div>
-
-                <ol class="comment-list">
-                  <!-- comment-list    -->
-                  {% for comment in post.get_comments %}
-                    <li class="comment">
-                      <div class="comment-info">
-                        {% if comment.user.author %}
-                          <img src="{{ comment.user.author.profile_picture.url }}" alt="..." class="pull-left hidden-xs img-circle"/>
-                        {% else %}
-                          <img src="{{ comment.user.author.profile_picture.url }}" alt="..." class="pull-left hidden-xs img-circle">
-                        {% endif %}
-                        <div class="author-desc">
-                          <div class="author-title">
-                            <strong>{{ comment.user.username }}</strong>
-                            <ul class="list-inline pull-right">
-                              <li><a href="{{ comment.user.author.profile_picture.url }}">{{ comment.timestamp|timesince }} ago
-                              </a></li>
-                            </ul>
-                          </div>
-                          <p>{{ comment.content }}</p>
-                        </div>
-                      </div>
-                    </li>
-                  {% endfor %}
-                  
-                  <!-- .comment -->
-                </ol>
-
-              </div>
-
-            <div class="clearfix"></div>
-            {% if request.user.is_authenticated %}
-              <div class="blog-section">
-                <div class="blog-heading">
-                  <h2>leave your comment </h2>
-                  <hr>
-                </div>
-                <div class="commentform">
-                  <form method="POST" action="." id="usercomment" class="commenting-form">
-                    {% csrf_token %}
-                    <div class="row">
-                      <div class="col-md-6 col-sm-12">
-                        {{ form }}
-                        <div class="col-md-12 col-sm-12 margin-top-20 clearfix">
-                          <button type="submit"  class="btn btn-primary">Post Your Comment</button>
-                        </div>
-                      </div>
-                    </div> 
-                  </form>
-                </div>
-              </div>
-              {% else %}
-              <a href="{% url 'account_login'%}?next={{ request.path }}" class="btn btn-primary"> Login to Comment</a>
-              {% endif %}
-            </div>
-
-
-            <!-- Blog Grid -->
-            <div class="clearfix"></div>
-            <!-- Pagination End -->
           </div>
-          <!-- Left Content End -->
+          <!-- Row -->
+          <div class="row">
+              <!-- Left Side Content -->
+              <div class="col-sm-12 col-xs-12 col-md-8">
+                  <!-- Blog Grid -->
+                  <div class="blog-detial">
+                      <div class="blog-image"><img alt="{{ post.title }}" class="img-responsive" src="{{ post.thumbnail.url }}"/></div>
+                      <div class="blog-content">
+                          <h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+                          {% if user.is_authenticated %}
+                          <form id="votefrm" name="votefrm">
+                              {% csrf_token %}
+                              <input type="hidden" id="hidden_postid" name="hidden_postid" value="{{ post.id }}"/>
+                              {% if liked %}
+                              <div>
+                                  <button type="submit"
+                                      name="post_id"
+                                      value="{{ post.id }}"
+                                      class="vote-btn" 
+                                      data-default-text="Vote This Dish Up!">
+                                      <i class="icon-heart"></i>
+                                  </button>
+                                  <span class="vote_count" id="vote_count">{{ vote_count }} </span>
+                              </div>
+                              {% else %}
+                              <div>
+                                  <button type="submit"
+                                      name="post_id"
+                                      value="{{ post.id }}"
+                                      class="vote-btn" 
+                                      data-default-text="Vote This Dish Up!">
+                                      <i class="icon-heart"></i>
+                                  </button>
+                                  <span class="vote_count" id="vote_count">{{ vote_count }} </span>
+                              </div>
+                              {% endif %}
+                          </form>
+                          {% else %}
+                          <div>
+                              <a href="{% url 'account_login'%}?next={{ request.path }}">
+                                  <svg width="25" height="25" aria-label="clap"><g fill-rule="evenodd"><path d="M13.74 1l.76 2.97.76-2.97zM18.63 2.22l-1.43-.47-.4 3.03zM11.79 1.75l-1.43.47 1.84 2.56zM24.47 14.3L21.45 9c-.29-.43-.69-.7-1.12-.78a1.16 1.16 0 0 0-.91.22c-.3.23-.48.52-.54.84l.05.07 2.85 5c1.95 3.56 1.32 6.97-1.85 10.14a8.46 8.46 0 0 1-.55.5 5.75 5.75 0 0 0 3.36-1.76c3.26-3.27 3.04-6.75 1.73-8.91M14.58 10.89c-.16-.83.1-1.57.7-2.15l-2.5-2.49c-.5-.5-1.38-.5-1.88 0-.18.18-.27.4-.33.63l4.01 4z"></path><path d="M17.81 10.04a1.37 1.37 0 0 0-.88-.6.81.81 0 0 0-.64.15c-.18.13-.71.55-.24 1.56l1.43 3.03a.54.54 0 1 1-.87.61L9.2 7.38a.99.99 0 1 0-1.4 1.4l4.4 4.4a.54.54 0 1 1-.76.76l-4.4-4.4L5.8 8.3a.99.99 0 0 0-1.4 0 .98.98 0 0 0 0 1.39l1.25 1.24 4.4 4.4a.54.54 0 0 1 0 .76.54.54 0 0 1-.76 0l-4.4-4.4a1 1 0 0 0-1.4 0 .98.98 0 0 0 0 1.4l1.86 1.85 2.76 2.77a.54.54 0 0 1-.76.76L4.58 15.7a.98.98 0 0 0-1.4 0 .99.99 0 0 0 0 1.4l5.33 5.32c3.37 3.37 6.64 4.98 10.49 1.12 2.74-2.74 3.27-5.54 1.62-8.56l-2.8-4.94z"></path></g></svg>
+                              </a>
+                              <span class="badge">{{ vote_count }}</span>
+                          </div>
+                          {% endif %}
+                          
+                          <ul class="post-meta">
+                              <li>By {{ post.author.user.username }}</li>
+                              {% for cat in post.categories.all %}
+                              <li><a href="{% url 'searchbycat' category=cat %}">{{ cat }}</a></li>
+                              {% endfor %}
+                              <li><i class="fa fa-clock-o" aria-hidden="true"></i> {{ post.timestamp|timesince }} ago</li>
+                              <li><i class="fa fa fa-eye" aria-hidden="true"></i> {{ post.view_count }}</li>
+                              <li><i class="icon-chat"></i>**{{ post.comment_count }}</li>
+                          </ul>
+                          {% if user.is_authenticated %}
+                          <div>
+                              <a href="{% url 'post-update' pk=post.pk %}">Update</a>
+                              <a href="{% url 'post-delete' pk=post.pk %}">Delete</a>
+                          </div>
+                          {% endif %}
+                          
+                      </div>   
+                          
+                          <h3>{{ post.overview }}</h3>
+                          
+                          <div style="font-size: 15px;">
+                              {{ post.content | safe }}
+                          </div>
+                          
+                          <div class="clearfix"></div>
+                          
+                          <div class="entry-footer">
+                              <div class="post-admin">
+                                  <i class="icon-profile-male"></i>Posted by<a href="#">{{ post.author.user.username }}</a>
+                              </div>
+                              <div class="tags">
+                                  <i class="fa fa-tags"></i>
+                                  {% for tag in tags %}
+                                  <a href="{% url 'searchbytag' tags=tag %}">{{ tag }}</a>
+                                  {% endfor %}
+                              </div>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+                              {% if post.previous_post %}
+                              <a href="{{ post.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
+                                  <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                                  <div class="text"><strong class="text-primary">Previous Post </strong>
+                                      <h6>{{ post.previous_post.title }}</h6>
+                                  </div>
+                              </a>
+                              {% endif %}
+                              {% if post.next_post %}
+                              <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                                  <div class="text"><strong class="text-primary">Next Post </strong>
+                                      <h6>{{ post.next_post.title }}</h6>
+                                  </div>
+                                  <div class="icon next"><i class="fa fa-angle-right">   </i></div>
+                              </a>
+                              {% endif %}
+                          </div>
+                          
+                          <div class="blog-section">
+                              <div class="blog-heading">
+                                  <h2>Comments ({{ post.comments.count }})</h2>
+                                  <hr/>
+                              </div>
+                              
+                              <ol class="comment-list">
+                                  <!-- comment-list    -->
+                                  {% for comment in post.get_comments %}
+                                  <li class="comment">
+                                      <div class="comment-info">
+                                          {% if comment.user.author %}
+                                          <img src="{{ comment.user.author.profile_picture.url }}" alt="..." class="pull-left hidden-xs img-circle"/>
+                                          {% else %}
+                                          <img src="{{ comment.user.author.profile_picture.url }}" alt="..." class="pull-left hidden-xs img-circle"/>
+                                              {% endif %}
+                                              <div class="author-desc">
+                                                  <div class="author-title">
+                                                      <strong>{{ comment.user.username }}</strong>
+                                                      <ul class="list-inline pull-right">
+                                                          <li><a href="{{ comment.user.author.profile_picture.url }}">{{ comment.timestamp|timesince }} ago
+                                                          </a></li>
+                                                      </ul>
+                                                  </div>
+                                                  <p>{{ comment.content }}</p>
+                                              </div>
+                                      </div>
+                                  </li>
+                                  {% endfor %}
+                                  
+                                  <!-- .comment -->
+                              </ol>
+                              
+                          </div>
+                          
+                          <div class="clearfix"></div>
+                          {% if request.user.is_authenticated %}
+                          <div class="blog-section">
+                              <div class="blog-heading">
+                                  <h2>leave your comment </h2>
+                                  <hr/>
+                              </div>
+                              <div class="commentform">
+                                  <form method="POST" action="." id="usercomment" class="commenting-form">
+                                      {% csrf_token %}
+                                      <div class="row">
+                                          <div class="col-md-6 col-sm-12">
+                                              {{ form }}
+                                              <div class="col-md-12 col-sm-12 margin-top-20 clearfix">
+                                                  <button type="submit"  class="btn btn-primary">Post Your Comment</button>
+                                              </div>
+                                          </div>
+                                      </div> 
+                                  </form>
+                              </div>
+                          </div>
+                          {% else %}
+                          <a href="{% url 'account_login'%}?next={{ request.path }}" class="btn btn-primary"> Login to Comment</a>
+                          {% endif %}
+                      </div>
+                      
+                      
+                      <!-- Blog Grid -->
+                      <div class="clearfix"></div>
+                      <!-- Pagination End -->
+                  </div>
+                  <!-- Left Content End -->
+                  
+                  {% include 'right_sidebar_blog.html' with most_relative=most_relative author_details=author_details %}
+                  
+              </div>
+              
+              <!-- Row End -->
+          </div>
+          <!-- end container -->
+  
+  
+  <!-- Row End -->
+  
+  </section>
+<!-- =-=-=-=-=-=-= Question Details end =-=-=-=-=-=-= -->
 
-          {% include 'right_sidebar_blog.html' with most_relative=most_relative  %}
-
-        </div>
-
-        <!-- Row End -->
-      </div>
-      <!-- end container -->
-    </section>
-          
-        <!-- Row End -->
-      </div>
-    </section>
-    <!-- =-=-=-=-=-=-= Question Details end =-=-=-=-=-=-= -->
 
 
-
-  </div>
-  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+</div>
+<!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
 
 {% endblock content %}

@@ -46,9 +46,9 @@ html, body {
 body {
 	font-family: 'Open Sans', sans-serif;
 	color: #777;
-	font-size: 14px;
+	font-size: 20px;
 	line-height: 1.8em;
-	font-weight: 400;
+	font-weight: 700;
 	overflow-x: hidden;
 	-webkit-text-size-adjust: 100%;
 	-webkit-overflow-scrolling: touch;
@@ -826,7 +826,7 @@ form.search-form input.search-btn:hover {
 /* =-=-=-=-=-=-= Parallax Settings  =-=-=-=-=-=-= */
 
 .full-section.parallax-home {
-	background: transparent url("../images/slider3.jpg") center center no-repeat;
+	background: url("../images/slider3.jpeg") center center no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;

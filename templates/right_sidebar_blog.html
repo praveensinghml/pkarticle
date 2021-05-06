@@ -1,8 +1,45 @@
+{% load static %}
           <!-- Right Sidebar -->
           <div class="col-sm-12 col-xs-12 col-md-4">
 
             <!-- sidebar -->
             <div class="side-bar">
+              <div class="widget">
+                <div class="widget-image widget-image-sm" style="height: 220px;"> <img alt="image" src="{% static 'images/nick-morrison-FHnnjk1Yj7Y-unsplash.jpg' %}">
+                  <div class="widget-image-content text-center"> <img class="img-thumbnail" alt="avatar" src="{{ author_details.profile_picture.url }}">
+                    <h2 class="widget-heading text-light"><strong>{{ author_details.user }}</strong></h2>
+                    <h4 class="widget-heading text-light-op"><em>{{ author_details.desination }}</em></h4>
+                  </div>
+                </div>
+                <div class="widget-content widget-content-full border-bottom">
+                  <div class="row text-center">
+                    <div class="col-xs-6 push-inner-top-bottom border-right">
+                      <h3 class="widget-heading"><i class=" icon-trophy push"></i> <br>
+                                            <small><strong>10</strong> Posts</small></h3>
+                    </div>
+                    <div class="col-xs-6 push-inner-top-bottom">
+                      <h3 class="widget-heading"><i class=" icon-profile-male themed-color-social push"></i> <br>
+                                            <small><strong>0</strong> Votes</small></h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="widget-content border-bottom">
+                  <h4>About</h4>
+                  {% if author_details.aboutme %}
+                  <p>{{ author_details.aboutme }}</p>
+                  {% else %}
+                  <p>Author didn't mention about him.</p>
+                  {% endif %}
+                </div>
+                <!-- <div class="widget-content">
+                  <div class="btn-group">
+                    <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Facebook"></a>
+                    <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Facebook"><i class="fa fa-facebook fa-fw"></i></a>
+                    <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Twitter"><i class="fa fa-twitter fa-fw"></i></a>
+                    <a title="" data-toggle="tooltip" class="btn btn-default" href="javascript:void(0)" data-original-title="Google Plus"><i class="fa fa-google-plus fa-fw"></i></a>
+                  </div>
+                </div> -->
+              </div>
 
               <div class="widget">
                 <div class="latest-news">
