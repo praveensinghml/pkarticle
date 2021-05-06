@@ -68,7 +68,7 @@
 	Brush.prototype = new SyntaxHighlighter.Highlighter();
 	Brush.aliases = ['applescript'];
 
-	SyntaxHighlighter.brushes.AppleScript = Brush;
+	.AppleScript = Brush;
 
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;

@@ -1,8 +1,12 @@
-from tinymce import HTMLField
+<<<<<<< HEAD
+=======
+from tinymce.models import HTMLField
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+from tinymce import models as tinymce_models
 
 User = get_user_model()
 
@@ -16,7 +20,15 @@ class PostView(models.Model):
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+<<<<<<< HEAD
+    authorname = models.CharField(max_length=100)
+    aboutme = models.CharField(max_length=300)
+    desination = models.CharField(max_length=100)
     profile_picture = models.ImageField()
+=======
+    profile_picture = models.ImageField(blank=True,null=True)
+   
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
 
     def __str__(self):
         return self.user.username
@@ -50,7 +62,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, null = False)
     overview = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    content = HTMLField()
+    content = tinymce_models.HTMLField(blank=True)
     # comment_count = models.IntegerField(default = 0)
     # view_count = models.IntegerField(default = 0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -107,4 +119,8 @@ class Post(models.Model):
     @property
     def get_tags(self):
         return Tags.objects.filter(post=self)
+
+    @property
+    def get_authordetails(self):
+        return Author.objects.get(post=self)
 

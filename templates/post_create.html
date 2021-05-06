@@ -1,7 +1,167 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% load crispy_forms_tags %}
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="ScriptsBundle">
+    <title>{{ post.title }}</title>
+    <!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/et-line-fonts.css' %}">
+        <!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.style.css' %}">
+    <!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+    <!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
+    <link type="text/css" rel="Stylesheet" href="{% static 'css/styles/shCoreDefault.css' %}" />
+    <!-- =-=-=-=-=-=-= Css Animation =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
+    <!-- =-=-=-=-=-=-= Hover Dropdown =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-dropdownhover.min.css' %}" />
+    <!-- JavaScripts -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     -->
+     
+     <meta name="title" content="Data Science Mastery">
+     <meta name="description" content="Free articles and blogger websiet for machine learning and deep learning, django, python">
+     <meta name="keywords" content="python, flask, streamlit, C#, .Net, machine learning, deep learning, django, blog, article, software">
+     <meta name="robots" content="index, nofollow">
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <meta name="language" content="English">
+     <meta name="revisit-after" content="1 days">
+     <meta name="author" content="Praveen Singh">
+ 
+     <meta property="og:site_name" content="Learn DataScience and Machine learning by DataScienceMastery"/>
+     <meta property="og:type" content="article" />
+     <meta property="og:title" content="Data Science Mastery and Machine Learning" />
+     <meta property="og:description" content="Free articles and blogger websiet for machine learning and deep learning, django, python" />
+     <meta property="og:url" content="https://DataScienceMastery.in"/>
+     <meta property="article:tag" content="Data Science"/>
+     <meta property="article:tag" content="machine learning" />
+     <meta property="article:tag" content="deep learning" />
+     <meta property="article:tag" content="beginner articles for machine learning" />
+     <meta property="article:tag" content="beginner articles for deep learning" />
+     <meta property="article:tag" content="beginner and advance for python" />
+     <meta property="article:tag" content="beginner and advance for django" />
+     <meta property="article:tag" content="beginner and advance for flask" />
+     <meta property="article:tag" content="free a lot of tools for machine learning" />
+     <meta property="article:tag" content="EDA and Hyper parameter tunning" />
+     <meta property="article:tag" content="streamlit blog and tutorial for streamlit" />
+ 
+</head>
+{% endblock head %}
+
 
 {% block content %}
+<<<<<<< HEAD
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script>
+  $(document).ready(function() {
+      // $('#sub').on('click', function() {
+      //     // tinyMCE.triggerSave();
+      //     // alert($("#post_content").val())
+      //     var content = $("#postcontent").val()
+      //     content = content.replace('src=\"../media/blog_img', 'src=\"/media/blog_img')
+
+      //     $("#postcontent").text(content)
+      //     alert($("#postcontent").val())
+
+      // });
+      tinymce.init({
+        selector: "textarea#postcontent",
+        images_upload_base_path: '/media',
+        relative_urls: false,
+
+        setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
+        });
+        },
+        theme: "modern",
+        paste_data_images: true,
+        plugins: [
+          "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount visualblocks visualchars code fullscreen",
+          "insertdatetime media nonbreaking save table contextmenu directionality",
+          "emoticons template paste textcolor colorpicker textpattern codesample"
+        ],
+        codesample_languages: [
+            {text: 'HTML/XML', value: 'markup'},
+            {text: 'JavaScript', value: 'javascript'},
+            {text: 'CSS', value: 'css'},
+            {text: 'Python', value: 'python'},
+            {text: 'Java', value: 'java'},
+            {text: 'C', value: 'c'},
+            {text: 'C#', value: 'csharp'}
+        ],
+        toolbar: 'codesample',
+        toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+        toolbar2: "print preview media | forecolor backcolor emoticons",
+        image_advtab: true,
+        file_picker_callback: function(callback, value, meta) {
+          if (meta.filetype == 'image') {
+            $('#upload').trigger('click');
+            $('#upload').on('change', function() {
+              var titleVal = $("#id_title").val()
+              var file = this.files[0];
+              // var reader = new FileReader();
+              var token = '{{ csrf_token }}';
+              var data1 = new FormData()
+              data1.append('docf', file)
+
+              $.ajax({
+                  type: 'POST',
+                  url: '{% url "upload_img"  %}',
+                  data: data1,
+                  processData: false,
+                  contentType: false,
+                  headers: {'X-CSRFToken': token},
+                  success: function (data) {
+                    callback(data.imgpath, {alt: titleVal});
+                  }
+              });
+
+            });
+          }
+        },
+        templates: [{
+          title: 'Test template 1',
+          content: 'Test 1'
+        }, {
+          title: 'Test template 2',
+          content: 'Test 2'
+        }]
+      });
+    });
+</script>
+=======
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
 <section class="section-padding-80 white" id="post-question">
       <div class="container">
         <div class="row">
@@ -10,10 +170,19 @@
             <div class="box-panel">
                 <h2>{{ title }} an article</h2>
                 {{ form.media }}
+<<<<<<< HEAD
+                <form method="POST" action="/create/" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  <input name="image" type="file" id="upload" style="display: none;"/>
+
+                    <button class="btn btn-primary"  id="sub" type="submit">Submit</button>
+=======
                 <form method="POST" action="." enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
                     <button class="btn btn-primary" type="submit">Submit</button>
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
                 </form>
             </div>
            </div>

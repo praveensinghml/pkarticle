@@ -1,110 +1,169 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="ScriptsBundle">
+    <title>{{ post.title }}</title>
+    <!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/et-line-fonts.css' %}">
+        <!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.style.css' %}">
+    <!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+    <!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
+    <link type="text/css" rel="Stylesheet" href="{% static 'css/styles/shCoreDefault.css' %}" />
+    <!-- =-=-=-=-=-=-= Css Animation =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
+    <!-- =-=-=-=-=-=-= Hover Dropdown =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-dropdownhover.min.css' %}" />
+    <!-- JavaScripts -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+     <meta name="title" content="Data Science Mastery">
+     <meta name="description" content="Free articles and blogger websiet for machine learning and deep learning, django, python">
+     <meta name="keywords" content="python, flask, streamlit, C#, .Net, machine learning, deep learning, django, blog, article, software">
+     <meta name="robots" content="index, nofollow">
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <meta name="language" content="English">
+     <meta name="revisit-after" content="1 days">
+     <meta name="author" content="Praveen Singh">
+ 
+     <meta property="og:site_name" content="Learn DataScience and Machine learning by DataScienceMastery"/>
+     <meta property="og:type" content="article" />
+     <meta property="og:title" content="Data Science Mastery and Machine Learning" />
+     <meta property="og:description" content="Free articles and blogger websiet for machine learning and deep learning, django, python" />
+     <meta property="og:url" content="https://DataScienceMastery.in"/>
+     <meta property="article:tag" content="Data Science"/>
+     <meta property="article:tag" content="machine learning" />
+     <meta property="article:tag" content="deep learning" />
+     <meta property="article:tag" content="beginner articles for machine learning" />
+     <meta property="article:tag" content="beginner articles for deep learning" />
+     <meta property="article:tag" content="beginner and advance for python" />
+     <meta property="article:tag" content="beginner and advance for django" />
+     <meta property="article:tag" content="beginner and advance for flask" />
+     <meta property="article:tag" content="free a lot of tools for machine learning" />
+     <meta property="article:tag" content="EDA and Hyper parameter tunning" />
+     <meta property="article:tag" content="streamlit blog and tutorial for streamlit" />
+ 
+     
+
+  </head>
+{% endblock head %}
+
 
 {% block content %}
 
   <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
   <div class="main-content-area">
 
-    <!-- =-=-=-=-=-=-= Latest Questions  =-=-=-=-=-=-= -->
-    <section class="section-padding-80 white" id="latest-post">
+    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+    <section class="page-title">
       <div class="container">
-        <!-- title-section -->
-        <div class="main-heading text-center">
-          <h2>All Articles</h2>
-          <div class="slices"><span class="slice"></span><span class="slice"></span><span class="slice"></span>
-          </div>
-        </div>
-        <!-- End title-section -->
-
         <div class="row">
-          <!-- Content Area Bar -->
-          <div class="col-md-8 col-sm-12">
-            <div class="listing">
-              <!-- Question Area Panel -->
-              <div class="listing-area">
-                
-                {% for post in queryset %}
-                    <!-- Question Listing -->
-                    <div class="listing-grid ">
-                      <div class="row">
-                        <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
-                          <a data-toggle="tooltip" data-placement="bottom" data-original-title="{{post.author.user.username }}" href="#">
-                            <img alt="" class="correct img-responsive center-block" src="{{ post.author.profile_picture.url }}">
-                          </a>
-                          <span class="tick"><i class="fa fa-check" aria-hidden="true"></i></span>
-                        </div>
-                        <div class="col-md-7 col-sm-8  col-xs-12">
-                          <h3><a  href="{{ post.get_absolute_url }}"> 	
-                            {{ post.title }}</a></h3>
-                          <div class="listing-meta">
-                            <span><i class="fa fa-clock-o" aria-hidden="true"></i>{{ post.timestamp|timesince }} ago</span>
-                            <span><i class="fa fa fa-eye" aria-hidden="true"></i>  {{ post.view_count }} Views</span>
-                          </div>
-
-                        </div>
-                        <div class="col-md-3 col-sm-2 col-xs-12">
-                          <ul class="question-statistic">
-
-                            <li class="active">
-                              <i class="fa fa-comment"></i><a data-toggle="tooltip" data-placement="bottom" data-original-title="Comments"><span>{{ post.comment_count }}</span></a>
-                            </li>
-                            <li>
-                              <svg width="29" height="29" aria-label="clap"><g fill-rule="evenodd"><path d="M13.74 1l.76 2.97.76-2.97zM18.63 2.22l-1.43-.47-.4 3.03zM11.79 1.75l-1.43.47 1.84 2.56zM24.47 14.3L21.45 9c-.29-.43-.69-.7-1.12-.78a1.16 1.16 0 0 0-.91.22c-.3.23-.48.52-.54.84l.05.07 2.85 5c1.95 3.56 1.32 6.97-1.85 10.14a8.46 8.46 0 0 1-.55.5 5.75 5.75 0 0 0 3.36-1.76c3.26-3.27 3.04-6.75 1.73-8.91M14.58 10.89c-.16-.83.1-1.57.7-2.15l-2.5-2.49c-.5-.5-1.38-.5-1.88 0-.18.18-.27.4-.33.63l4.01 4z"></path><path d="M17.81 10.04a1.37 1.37 0 0 0-.88-.6.81.81 0 0 0-.64.15c-.18.13-.71.55-.24 1.56l1.43 3.03a.54.54 0 1 1-.87.61L9.2 7.38a.99.99 0 1 0-1.4 1.4l4.4 4.4a.54.54 0 1 1-.76.76l-4.4-4.4L5.8 8.3a.99.99 0 0 0-1.4 0 .98.98 0 0 0 0 1.39l1.25 1.24 4.4 4.4a.54.54 0 0 1 0 .76.54.54 0 0 1-.76 0l-4.4-4.4a1 1 0 0 0-1.4 0 .98.98 0 0 0 0 1.4l1.86 1.85 2.76 2.77a.54.54 0 0 1-.76.76L4.58 15.7a.98.98 0 0 0-1.4 0 .99.99 0 0 0 0 1.4l5.33 5.32c3.37 3.37 6.64 4.98 10.49 1.12 2.74-2.74 3.27-5.54 1.62-8.56l-2.8-4.94z"></path></g></svg><a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span>{{ post.vote_count }}</span></a>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div class="col-md-10 col-sm-10  col-xs-12">
-                          <p>{{ post.overview|linebreaks|truncatechars:200 }}</p>
-                          <div class="pull-right tagcloud">
-                            {% for tag in tags %}
-                              <a href="{% url 'searchbytag' tags=tag.tags__title %}">{{ tag.tags__title }}</a>
-                            {% endfor %}
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-      
-                {% endfor %}
-                <!-- Question Listing End -->
-              </div>
-
-              <!-- Pagination View More -->
-            {% if is_paginated %}
-            
-            <nav aria-label="Page navigation example" style="margin-left: 250px;">
-              <ul class="pagination pagination-template d-flex justify-content-center">
-                {% if page_obj.has_previous %}                
-                <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
-                {% endif %}
-                <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.number }}" class="page-link active">{{ page_obj.number }}</a></li>
-                {% if page_obj.has_next %}
-                <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
-                {% endif %}
-              </ul>
-            </nav>
-            
-            {% endif %}
-
-              <!-- Pagination View More End -->
-
-              <!-- Question Area Panel End -->
-            </div>
+          <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+            <h1><i class="icofont icon-ribbon"></i>Latest Blogs &amp; Articles</h1>
           </div>
-          <!-- Content Area Bar End -->
-          {% include 'right_sidebar.html' with most_recent=most_recent category_count=category_count tags=tags %}
-
-
-          <div class="clearfix"></div>
+          
         </div>
+        <!-- end row -->
       </div>
       <!-- end container -->
     </section>
-    <!-- =-=-=-=-=-=-= Latest Questions  End =-=-=-=-=-=-= -->
 
-    
+    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
 
+    <!-- =-=-=-=-=-=-= Blog & News =-=-=-=-=-=-= -->
+    <section id="blog" class="custom-padding white">
+      <div class="container">
+        <!-- Row -->
+        <div class="row">
+
+          <!-- Left Side Content -->
+          <div class="col-sm-12 col-xs-12 col-md-8"> 
+
+            <!-- Blog Masonry Grid -->
+            <div id="posts-masonry" class="posts-masonry" style="position: relative; height: 1500px;">
+              
+              <div class="col-xs-12 col-sm-12 col-md-8  col-lg-12" style="position: absolute; left: 0px; top: 0px;">
+              {% for post in queryset %}
+                <!-- Blog Grid -->
+               <div class="blog-grid">
+                 <div class="blog-content">
+                     <div class="blog-image"> <img alt="blog-image1" class="img-responsive" src="{{ post.thumbnail.url }}"> </div>
+                    <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                    <p>{{ post.overview|linebreaks|truncatechars:200 }}</p>
+                    <ul class="post-meta">
+                      <li>By {{post.author.user.username }}</li>
+                      <li> {% for tag in tags %}
+                        <i class="fa fa-tags"></i><a href="{% url 'searchbytag' tags=tag.tags__title %}">{{ tag.tags__title }}</a>
+                      {% endfor %}</li>
+                      <li><i class="fa fa-clock-o"></i> {{ post.timestamp|timesince }} ago</li>
+                    </ul>
+
+                  </div>
+                  <div class="blog-footer">
+                    <ul class="like-comment">
+                      <li><a style="color:black;  font-weight: bold;" href="#"><i class="icon-heart"></i>{{ post.vote_count }}</a>
+                      </li>
+                      <li><a style="color:black;  font-weight: bold;" href="#"><i class="fa fa fa-eye"></i>{{ post.view_count }}</a>
+                      </li>
+                      <li><a style="color:black;  font-weight: bold;" href="#"><i class="icon-chat"></i>{{ post.comment_count }}</a></li>
+                    </ul>
+                    <a style="color:black;  font-weight: bold;" href="{{ post.get_absolute_url }}" class="more-btn pull-right"><i class="fa fa-long-arrow-right"></i> MORE</a> </div>
+                </div>
+              <!-- Blog Grid -->
+              {% endfor %}
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="text-center  section-padding-300">
+              <ul class="pagination" style="margin-left: 300px;">
+                {% if page_obj.has_previous %}                
+                <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.previous_page_number }}"> <i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                {% endif %}
+                <li><a aria-label="Previous" href="?{{ page_request_var }}={{ page_obj.number }}" class="page-link active">{{ page_obj.number }}</a></li>
+                {% if page_obj.has_next %}
+                <li><a aria-label="Next" aria-hidden="true" href="?{{ page_request_var }}={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </div>
+            {% endif %}
+            <!-- Pagination End -->
+
+              </div>
+            </div>
+            <!-- Blog Masonry Grid -->
+          </div>
+          <!-- Left Content End -->
+
+          <!-- Blog Right Sidebar -->
+          {% include 'right_sidebar.html' with most_recent=most_related category_count=category_count tags=tags %}
+
+
+        </div>
+
+        <!-- Row End -->
+      </div>
+      <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Blog & News end =-=-=-=-=-=-= -->
+
+
+  </div>
   <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
   {% endblock content %}

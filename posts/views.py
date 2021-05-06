@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import CommentForm, PostForm
-from .models import Post, Author, PostView
+from .models import Post, Author, PostView,Comment
 from marketing.forms import EmailSignupForm
 from marketing.models import Signup
 from django.urls import reverse_lazy, reverse
@@ -14,6 +14,12 @@ from django.http import HttpResponseRedirect
 from django.template.defaultfilters import slugify
 from django.core.mail import send_mail
 from django.conf import settings
+
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from PIL import Image
+from django.http import HttpResponse
+import uuid
 
 
 form = EmailSignupForm()
@@ -38,7 +44,6 @@ def get_tags_count():
         .values('tags__title') \
         .annotate(Count('tags__title'))
     return queryset
-
 
 class SearchView(View):
     def get(self, request, *args, **kwargs):
@@ -135,7 +140,7 @@ class IndexView(View):
         most_recent = Post.objects.filter(featured=True).order_by('-timestamp')[:3]
         post_list = Post.objects.filter(featured=True).all()
         tags = get_tags_count()
-        paginator = Paginator(post_list, 5)
+        paginator = Paginator(post_list, 2)
         page_request_var = 'page'
         page = request.GET.get(page_request_var)
         try:
@@ -171,14 +176,14 @@ class PostListView(ListView):
     model = Post
     template_name = 'blog.html'
     context_object_name = 'queryset'
-    paginate_by = 3
+    paginate_by =2
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
-        most_recent = Post.objects.order_by('-timestamp')[:3]
+        most_recent = Post.objects.filter(featured=True).order_by('-timestamp')[:3]
         tags = get_tags_count()
         context = super().get_context_data(**kwargs)
-        context['most_recent'] = most_recent
+        context['most_related'] = most_recent
         context['page_request_var'] = "page"
         context['category_count'] = category_count
         context['tags'] = tags
@@ -204,22 +209,22 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
-        vote_count = get_object_or_404(Post, id= self.kwargs['pk'])
-        tags = get_object_or_404(Post, id= self.kwargs['pk'])
+        post = get_object_or_404(Post, id= self.kwargs['pk'])
         rhs_tags = get_tags_count()
-        most_recent = Post.objects.order_by('-timestamp')[:3]
+        most_relative = Post.objects.order_by('-timestamp')[:3]
         liked = False
-        if vote_count.votes.filter(id = self.request.user.id).exists():
+        if post.votes.filter(id = self.request.user.id).exists():
             liked = True
 
         context = super().get_context_data(**kwargs)
-        context['most_recent'] = most_recent
+        context['most_relative'] = most_relative
         context['page_request_var'] = "page"
         context['category_count'] = category_count
         context['liked'] = liked
-        context['vote_count'] = vote_count.vote_count
-        context['tags'] = tags.get_tags[0],
-        context['rhs_tags'] = rhs_tags[0],
+        context['vote_count'] = post.vote_count
+        context['tags'] = post.get_tags[0],
+        context['rhs_tags'] = rhs_tags[0]
+        context['author_details'] = post.get_authordetails
         
         context['form'] = self.form
         return context
@@ -236,7 +241,6 @@ class PostDetailView(DetailView):
             }))
 
 
-
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_create.html'
@@ -247,16 +251,39 @@ class PostCreateView(CreateView):
         context['title'] = 'Create'
         return context
 
+   
     def form_valid(self, form):
-        form.instance.author = get_author(self.request.user)
-        form.save()
-        return redirect(reverse("post-detail", kwargs={
-            'pk': form.instance.pk,
-            'slug': slugify(form.instance.title)
-        }))
+        if self.request.user.is_authenticated:
+            form.instance.author = get_author(self.request.user)
+            form.save()
+            return redirect(reverse("post-detail", kwargs={
+                'pk': form.instance.pk,
+                'slug': slugify(form.instance.title)
+            }))
+        else:
+            return redirect("/accounts/login")
 
 
 
+ 
+
+def upload(request):
+    try:
+        file = request.FILES['docf']
+        updatedImgName = str(uuid.uuid4())
+        imgExt = file.name.split('.')[1]
+        img = Image.open(file)
+        img.thumbnail((500, 500), Image.ANTIALIAS)
+        try:
+            img.save(settings.MEDIA_ROOT+"/blog_img/" + updatedImgName+"."+imgExt)
+            print("img save pass")
+        except:
+            print("img.save error")
+        path = "/media/blog_img/" + updatedImgName+"."+imgExt
+
+        return JsonResponse({"imgpath": path}, status=200)
+    except Exception:
+        return HttpResponse("error")
 
 class PostUpdateView(UpdateView):
     model = Post
@@ -295,8 +322,40 @@ class PostDeleteView(DeleteView):
     success_url = '/blog'
     template_name = 'post_confirm_delete.html'
 
+class user_dashboard(View):
+     def get(self,request):
+         count=0
+         com_count=0 
+         user=request.user
+         author=get_author(request.user) 
+         my_post_count=post_count(get_author(request.user))
+         my_published_post=Post.objects.filter(author=author)
+         for x in my_published_post:
+               com_count+= Comment.objects.filter(post=x).count()
+                   
+            
+         for n in Post.objects.filter(author=author):
+            count += n.votes.count()
+
+         context={'user':user ,
+                 'author':author,
+                 'total_votes':count,
+                 'post_count':my_post_count,
+                 'my_published_post':my_published_post,
+                 'total_comments':com_count}
+         
+         return render(request,'account/profile_temp.html',context) 
+
+def post_count(user_id):
+  my_post=Post.objects.filter(author=user_id).count()
+  return my_post
 
 def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     post.delete()
     return redirect(reverse("post-list"))
+
+def PracticeView(request):
+    message_email = ""
+    if request.method == 'GET':
+        return render(request, "practice.html")

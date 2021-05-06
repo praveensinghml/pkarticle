@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="ScriptsBundle">
+    <title>{{ post.title }}</title>
+    <!-- =-=-=-=-=-=-= Favicons Icon =-=-=-=-=-=-= -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <!-- =-=-=-=-=-=-= Mobile Specific =-=-=-=-=-=-= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- =-=-=-=-=-=-= Bootstrap CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- =-=-=-=-=-=-= Template CSS Style =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+    <!-- =-=-=-=-=-=-= Et Line Fonts =-=-=-=-=-=-= -->
+    <link rel="stylesheet" href="{% static 'css/et-line-fonts.css' %}">
+        <!-- =-=-=-=-=-=-= Owl carousel =-=-=-=-=-=-= -->
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/owl.style.css' %}">
+    <!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+    <!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
+    <link type="text/css" rel="Stylesheet" href="{% static 'css/styles/shCoreDefault.css' %}" />
+    <!-- =-=-=-=-=-=-= Css Animation =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
+    <!-- =-=-=-=-=-=-= Hover Dropdown =-=-=-=-=-=-= -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-dropdownhover.min.css' %}" />
+    <!-- JavaScripts -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     -->
+     
+
+  </head>
+{% endblock head %}
+
+
+{% block content %}
+
+<style>
+  .post-body img {
+    width: 100%;
+  }
+
+</style>
+
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+  <div class="main-content-area">
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+            <h1>All Practices by Difficulty</h1>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= Question Details =-=-=-=-=-=-= -->
+
+    <section id="blog" class="custom-padding white">
+      <div class="container">
+
+        <!-- Row -->
+        <div class="row">
+          <div class="card-deck">
+            <div class="card border-success mb-3" style="max-width: 18rem;">
+              <div class="card-header bg-transparent border-success">Header</div>
+              <img class="card-img-top" src="{% static 'images/logo.png' %}" alt="Card image cap">
+                <div class="card-body text-success">
+                <h5 class="card-title">Success card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+              <div class="card-footer bg-transparent border-success">
+                <small class="text-muted">Last updated 3 mins ago</small>
+                <a href="#" class="btn btn-primary">Go somewhere</a></div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </div>
+            </div>
+            
+        </div>
+        </div>
+
+        <!-- Row End -->
+      </div>
+      <!-- end container -->
+    </section>
+          
+        <!-- Row End -->
+      </div>
+    </section>
+    <!-- =-=-=-=-=-=-= Question Details end =-=-=-=-=-=-= -->
+
+
+
+  </div>
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+
+{% endblock content %}

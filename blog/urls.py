@@ -5,6 +5,7 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView # new
 
 from posts.views import (
+    PracticeView,
     VoteView,
     IndexView,
     SearchView,
@@ -15,7 +16,13 @@ from posts.views import (
     PostCreateView,
     PostUpdateView,
     PostDeleteView,
-    ContactView
+    ContactView,
+<<<<<<< HEAD
+    upload
+=======
+    check,
+    user_dashboard  
+>>>>>>> e8941cfeab3ae0f98aa61645abbb294c2968b118
     )
 from marketing.views import email_list_signup
 
@@ -29,6 +36,7 @@ urlpatterns = [
     path('email-signup/', email_list_signup, name='email-list-signup'),
     # path('create/', post_create, name='post-create'),
     path('create/', PostCreateView.as_view(), name='post-create'),
+    path('upload/', upload, name='upload_img'),
     # path('post/<id>/', post_detail, name='post-detail'),
     path('post/<str:slug>-<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     # path('post/<id>/update/', post_update, name='post-update'),
@@ -37,13 +45,15 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('contact/', ContactView, name='contact'),
     path('vote/', VoteView, name='vote_post'),
+    path('practice/', PracticeView, name='practice'),
+    
     path('searchbycat/<category>/', blog_category, name='searchbycat'),
     path('searchbytag/<tags>/', blog_tags, name='searchbytag'),
     
     path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('allauth.urls')),
     path('accounts/profile/',
-         TemplateView.as_view(template_name='account/profile.html'),
+         user_dashboard.as_view(),
          name='profile')
 
 ]
@@ -53,3 +63,4 @@ if settings.DEBUG:
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+                           

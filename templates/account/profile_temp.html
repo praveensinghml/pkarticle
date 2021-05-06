@@ -1,0 +1,289 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+  <!-- =-=-=-=-=-=-= Main Area =-=-=-=-=-=-= -->
+
+
+  <div class="main-content-area">
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb =-=-=-=-=-=-= -->
+    <section class="page-title">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-7 col-xs-12 text-left">
+            <h1> My Profile </h1>
+          </div>
+          <!-- end col -->
+          <div class="col-md-6 col-sm-5 col-xs-12 text-right">
+            <div class="bread">
+              <ol class="breadcrumb">
+                {% comment %} <li><a href="#">Home</a>
+                </li>
+                <li><a href="#">Pages</a>
+                </li>
+                <li class="active">Profile</li> {% endcomment %}
+              </ol>
+            </div>
+            <!-- end bread -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= Page Breadcrumb End =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= User Profile =-=-=-=-=-=-= -->
+    <section id="user-profile" class="user-profile parallex">
+      <div class="container">
+        <!-- Row -->
+        <div class="row">
+
+          <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="profile-sec ">
+              <div class="profile-head">
+                <div class="col-md-6 col-xs-12 col-sm-6 no-padding">
+                  <div class="profile-avatar">
+                  {% if author.profile_picture %}
+                    <span><img class="img-responsive img-circle" alt="" src="{{author.profile_picture.url}}"></span>
+                    {% endif %}
+                    <div class="profile-name">
+                      <h3>{{user}}</h3>
+                      {% comment %} <i>Creative Graphic Designer</i> {% endcomment %}
+                      <ul class="social-btns">
+                        <li><a href="#" title=""><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#" title=""><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li><a href="#" title=""><i class="fa fa-twitter"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 no-padding">
+                  <ul class="profile-count">
+                  {% if my_published_post %}
+                    <li>{{post_count}}<i>Comments</i>
+                    </li>
+                    <li>{{total_votes}}<i>Votes</i>
+                    </li>
+                    <li>{{total_comments}}<i>Total Posts</i>
+                   {% else %} 
+                   <li>no comments<i>Comments</i>
+                    </li>
+                    <li>no votes<i>Votes</i>
+                    </li>
+                    <li>no posts<i>Total Posts</i>
+                    {% endif %}
+                    </li>
+                  </ul>
+                  <ul class="profile-connect">
+                    <li><a title="" href="#">Follow</a>
+                    </li>
+                    <li><a title="" href="#">Hire Me</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Profile Sec -->
+          </div>
+
+        </div>
+        <!-- Row End -->
+      </div>
+      <!-- end container -->
+    </section>
+
+    <!-- =-=-=-=-=-=-= User Profile end =-=-=-=-=-=-= -->
+    
+     <!-- =-=-=-=-=-=-= User TimeLine =-=-=-=-=-=-= -->
+
+    <section class="section-padding-80">
+
+      <div class="container">
+        <!-- Row -->
+        <div class="row">
+
+          <div class="col-md-12">
+
+            <div class="timeline-container">
+              <ul>
+              {% for post in my_published_post %}
+                <li>
+                  <div class="timeline">
+                    <div class="user-timeline">
+                    {% if author.profile_picture %}
+                      <span><img alt="" src="{{author.profile_picture.url}}"></span>
+                     {% endif %} 
+                    </div>
+                    <div class="timeline-detail">
+                      <div class="timeline-head">
+                        <h3><a href="{{ post.get_absolute_url }}">{{post.title}}</a><span>{{ post.timestamp|timesince }} ago</span></h3>
+                        <div class="social-share">
+                          <a title=""><i class="fa fa-share-alt"></i></a>
+                          <ul class="social-btns">
+                            <li><a href="#" data-placement="left" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#" data-placement="left" data-toggle="tooltip" title="Google"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li><a href="#" data-placement="left" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="timeline-content">
+                      <p> {{ post.overview|linebreaks|truncatechars:200 }}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+               
+             
+              </ul>
+            </div>
+
+            <!-- Pagination View More -->
+            <div class="text-center clearfix">
+              <button class="btn btn-primary btn-lg">View All Activities</button>
+            </div>
+            <!-- Pagination View More End -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- =-=-=-=-=-=-= User TimeLine End =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= Our Clients =-=-=-=-=-=-= -->
+    <section class="custom-padding white" id="clients">
+      <div class="container">
+
+        <!-- Row -->
+        <div class="row">
+
+          <!-- col-md-2 client-block -->
+          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
+
+            <!-- client-item client-item-style-2 -->
+            <div class="client-item client-item-style-2">
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_5.png"> </a>
+            </div>
+            <!-- /client-item client-item-style-2 -->
+
+          </div>
+          <!-- /col-md-2 client-block -->
+
+          <!-- col-md-2 client-block -->
+          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
+
+            <!-- client-item client-item-style-2 -->
+            <div class="client-item client-item-style-2">
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_6.png"> </a>
+            </div>
+            <!-- /client-item client-item-style-2 -->
+
+          </div>
+          <!-- /col-md-2 client-block -->
+
+          <!-- col-md-2 client-block -->
+          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
+
+            <!-- client-item client-item-style-2 -->
+            <div class="client-item client-item-style-2">
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_7.png"> </a>
+            </div>
+            <!-- /client-item client-item-style-2 -->
+
+          </div>
+          <!-- /col-md-2 client-block -->
+
+          <!-- col-md-2 client-block -->
+          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
+
+            <!-- client-item client-item-style-2 -->
+            <div class="client-item client-item-style-2">
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_8.png"> </a>
+            </div>
+            <!-- /client-item client-item-style-2 -->
+
+          </div>
+          <!-- /col-md-2 client-block -->
+
+          <!-- col-md-2 client-block -->
+          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
+
+            <!-- client-item client-item-style-2 -->
+            <div class="client-item client-item-style-2">
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_9.png"> </a>
+            </div>
+            <!-- /client-item client-item-style-2 -->
+
+          </div>
+          <!-- /col-md-2 client-block -->
+
+          <!-- col-md-2 client-block -->
+          <div class="col-md-2 col-xs-6 col-sm-4 client-block">
+
+            <!-- client-item client-item-style-2 -->
+            <div class="client-item client-item-style-2">
+              <a title="Client Logo" href="#"> <img alt="Clients Logo" src="images/clients/client_10.png"> </a>
+            </div>
+            <!-- /client-item client-item-style-2 -->
+
+          </div>
+          <!-- /col-md-2 client-block -->
+
+        </div>
+        <!-- Row End -->
+
+      </div>
+      <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Our Clients -end =-=-=-=-=-=-= -->
+
+  </div>
+  <!-- =-=-=-=-=-=-= Main Area End =-=-=-=-=-=-= -->
+  {% endblock content %}
+  <!-- =-=-=-=-=-=-= FOOTER =-=-=-=-=-=-= -->
+ 
+
+  <!-- =-=-=-=-=-=-= JQUERY =-=-=-=-=-=-= -->
+  <script src="js/jquery.min.js"></script>
+  <!-- Bootstrap Core Css  -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Jquery Smooth Scroll  -->
+  <script src="js/jquery.smoothscroll.js"></script>
+  <!-- Jquery Easing -->
+  <script type="text/javascript" src="js/easing.js"></script>
+  <!-- Jquery Counter -->
+  <script src="js/jquery.countTo.js"></script>
+  <!-- Jquery Waypoints -->
+  <script src="js/jquery.waypoints.js"></script>
+  <!-- Jquery Appear Plugin -->
+  <script src="js/jquery.appear.min.js"></script>
+  <!-- Carousel Slider  -->
+  <script src="js/carousel.min.js"></script>
+  <!-- Jquery Parallex -->
+  <script src="js/jquery.stellar.min.js"></script>
+  <!--Style Switcher -->
+  <script src="js/bootstrap-dropdownhover.min.js"></script>
+  <!-- Include jQuery Syntax Highlighter -->
+  <script type="text/javascript" src="scripts/shCore.js"></script>
+  <script type="text/javascript" src="scripts/shBrushPhp.js"></script>
+  <!-- Template Core JS -->
+  <script src="js/custom.js"></script>
+</body>
+
+</html>
