@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
+
 {% load static %}
 
 {% block head %}
@@ -281,7 +282,7 @@
                   </div>
                   <!-- Left Content End -->
                   
-                  {% include 'right_sidebar_blog.html' with most_relative=most_relative author_details=author_details %}
+                  {% include 'right_sidebar_blog.html' with most_relative=most_relative author_details=author_details authorpostcount=authorpostcount authorvotecount=authorvotecount %}
                   
               </div>
               

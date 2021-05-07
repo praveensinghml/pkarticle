@@ -215,6 +215,11 @@ class PostDetailView(DetailView):
         liked = False
         if post.votes.filter(id = self.request.user.id).exists():
             liked = True
+        current_author = get_author(self.request.user)
+        userpostcount = post_count(current_author)
+        author_votecount = 0
+        for n in Post.objects.filter(author=current_author):
+            author_votecount += n.votes.count()
 
         context = super().get_context_data(**kwargs)
         context['most_relative'] = most_relative
@@ -225,6 +230,9 @@ class PostDetailView(DetailView):
         context['tags'] = post.get_tags[0],
         context['rhs_tags'] = rhs_tags[0]
         context['author_details'] = post.get_authordetails
+        context['authorpostcount'] = userpostcount
+        context['authorvotecount'] = author_votecount
+        
         
         context['form'] = self.form
         return context
@@ -337,7 +345,7 @@ class user_dashboard(View):
          for n in Post.objects.filter(author=author):
             count += n.votes.count()
 
-         context={'user':user ,
+         context={
                  'author':author,
                  'total_votes':count,
                  'post_count':my_post_count,
