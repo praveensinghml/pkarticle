@@ -18,7 +18,6 @@ from posts.views import (
     PostDeleteView,
     ContactView,
     upload,
-    check,
     user_dashboard  
     )
 from marketing.views import email_list_signup
